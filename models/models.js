@@ -59,7 +59,7 @@ var Leaderboard = mongoose.model('Leaderboard', {
     }]
 });
 
-mongoose.connect('mongodb://localhost:27017/goldDB');
+mongoose.connect('mongodb://denthos:dARCHuti21!@ds043962.mongolab.com:43962/golddb');
 var FlashCard = mongoose.model('FlashCard', FlashCard);
 var Deck = mongoose.model('Deck', Deck);
 var User = mongoose.model('User', User);
