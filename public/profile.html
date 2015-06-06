@@ -63,7 +63,7 @@
                     for (var i = 0; i < user.decks.length; i++)
                     {
                         var favoriteDiv = 
-                        '<div class = "deckLink"> <a href = "http://localhost:9097/Search_Results_Signed.html?tags=' + user.decks[i] + '"> <div class = "image"> <img src="Images/CardSet.png" width="220" height="190"></div><div class = "caption"><h2>' + user.decks[i] + ' </h2></div></a></div><br>';
+                        '<div class = "deckLink"> <a href = "https://tritonbattles.herokuapp.com/Search_Results_Signed.html?tags=' + user.decks[i] + '"> <div class = "image"> <img src="Images/CardSet.png" width="220" height="190"></div><div class = "caption"><h2>' + user.decks[i] + ' </h2></div></a></div><br>';
 
                         var row = Math.floor((i%3) + 1);
                         $("#Favorites" + row).append(favoriteDiv);
