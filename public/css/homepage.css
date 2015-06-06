@@ -1,0 +1,43 @@
+.Title {
+	font-family:"Arial", Courier, monospace;	
+	text-align: center;
+	vertical-align: middle;
+	color:white;
+	height:180px;
+	font-size: 50px;
+	padding-top:10px;
+
+}
+.centerPage {
+	background-color: #0099FF;
+	position: absolute;
+	top:250px;
+	width:100%;
+	left:0;
+	text-align:center;
+	padding-bottom:30px;
+	overflow:scroll;
+}
+::-webkit-scrollbar { 
+    display: none; 
+}
+.submit {
+	background: url(Images/Submit.png);
+	height:40px;
+}
+.submit:hover {
+	background: url(Images/Study.png);
+}
+.signup:hover {
+	background:url(Images/Signup_Hover.png);
+}
+.login:hover {
+	background:url(Images/Login_Hover.png);
+}
+@media screen and (max-width: 900px) {
+	.Title {
+		height:100px;
+		width:auto;
+	}
+	
+}

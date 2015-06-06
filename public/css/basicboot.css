@@ -1,0 +1,115 @@
+
+body {
+	overflow:scroll;
+}
+::-webkit-scrollbar { 
+    display: none; 
+}
+/*Search bar appearance. Can modify for square vs round search bar*/
+.rounded { 
+	border-radius:0px; 
+	-moz-border-radius:0px; 
+	-webkit-border-radius:0px; 
+	width:200px;
+	position:absolute;
+	top:16px;
+		border:0px solid darkblue;
+	background-color:white;
+		padding:4px 2px;
+
+	z-index:10;
+}
+::-webkit-input-placeholder { /* For WebKit browsers */
+    color:    grey;
+
+}
+.roundedHomepage { 
+	border-radius:0px; 
+	-moz-border-radius:0px; 
+	-webkit-border-radius:0px; 
+	width:200px;
+	border:0px solid darkblue;
+	background-color:#F0F0F0 ;
+	padding:4px 2px;
+}
+.searchIcon {
+	top:20px;
+	left:443px;
+	position:absolute;
+	z-index:10;
+}
+/*Top header bar*/
+.topBar {
+	background-color: #0099FF;
+	position: absolute;
+	height: 56px;
+	width:100%;
+	top:0;
+	left:0;
+	z-index: 9;
+	padding-top:15px;
+	padding-bottom:7px;
+	display: inline;
+}
+.leftButtonPos {
+position:absolute;
+left:87%;
+top:13px;
+}
+.rightButtonPos {
+	position: absolute;
+	left:93%;
+	top:13px;
+}
+#search{
+	color: black;
+}
+/*Bar text align by choice*/
+.alignL {
+	text-align: left;	
+}
+.alignR {
+	text-align: right;
+}
+
+/*Link appearance*/
+.topBar a:link, .topBar a:visited { 
+    color: white;
+    text-decoration: none;
+    cursor: auto;
+    padding:10px;
+}
+
+body {
+	background: white;
+	font-family: "Segoe UI";
+
+}
+
+@media screen and (max-width: 900px) {
+
+	.topBar {
+		height:90px;
+	}
+	.alignR {
+		float: left;
+		display:inline;
+	}
+	.rounded {
+		left:50px;
+		top:50px;
+
+	}
+	.searchIcon {
+		left:260px;
+		top:52px;
+	}
+	.leftButtonPos {
+		left: 80%;
+	}
+	.rightButtonPos {
+		left:80%;
+		top:50px;
+	}
+	
+}

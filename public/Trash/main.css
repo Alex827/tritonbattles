@@ -1,0 +1,39 @@
+.navbar-default {
+	color: #5a5a5a;
+	font-size: 20px;
+	font-weight: bold;
+	padding: 5px;
+	text-transform: uppercase;
+}
+
+.navbar-right li{
+	display: inline;
+}
+
+.navbar-brand {
+	//background-image: url(http://r70.cooltext.com/rendered/cooltext117448786865004.png);
+}
+
+.jumbotron {
+	height: 500px;
+	background-image: url(http://i.imgur.com/adsKXLw.png);
+	background-size: 100% 100%;
+	font-family: Verdana, Geneva, sans-serif;
+}
+
+.jumbotron container{
+	position: relative;
+	top: 50%;
+}
+
+.jumbotron h1{
+	text-align: center;
+	font-weight: bold;
+	font-size: 48px;
+	color: #fff;
+}
+
+.jumbotron p{
+	font-size: 20px;
+	color: #000
+}

@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <link rel="stylesheet" type="text/css" href="css/competition.css">
+    <link rel="stylesheet" type="text/css" href="css/basicboot.css">
+    <link rel="stylesheet" type="text/css" href="css/login.css">
+    <link rel="stylesheet" type="text/css" href="css/sign_up.css">
+    <link rel="stylesheet" type="text/css" href="css/popUp.css">
+    
+    
+    <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css"> 
+    
+    <script src="../node_modules/angular/angular.min.js"></script>
+    <script src="../node_modules/angular-timer/dist/angular-timer.js"></script>
+    <script src="js/competition.js"></script>
+    <script src="../views/login.js" type="text/javascript"></script>
+    <script type="text/javascript" src="js/popUp.js"></script>
+</head>
+    
+<body>
+    
+    <!-- START Login/Register pages -->
+<div class="cover"></div>
+<div class="loginpopup">
+    <form id="loginform" class="form-signin" action="/api/login" method="POST" onsubmit="submitLogin();return false;">
+        <h2 class="form-signin-heading">Please Log In</h2>
+<label id="loginError" color="red"></label><br/>
+        <input type="text" id="inputUsername" class="form-control" placeholder="Username" name="username" required autofocus>
+        <input type="password" id="inputPassword" class="form-control" placeholder="Password" name="password" required>
+        <button class="btn btn-lg btn-primary btn-block" type="submit">Log In</button>
+<table style="margin-top: 10px">
+<tr>
+<td width="50%" style="padding: 3px">
+  <a href="/auth/google" class="btn btn-block btn-social btn-google-plus">
+      <i class="fa fa-google-plus"></i>
+      Google+
+    </a>
+</td>
+<td width="50%" style="padding: 3px">
+<a href="/auth/facebook" class="btn btn-block btn-social btn-facebook">
+            <i class="fa fa-facebook"></i>
+            Facebook
+            </a>
+</td>
+</tr>
+</table>
+    </form>
+</div>
+<div class="registerpopup">
+    <form id="registerform" class="form-signin" action="/api/register" method="POST" onsubmit="submitRegister();return false;">
+        <h2 class="form-signin-heading">User Registration</h2>
+        <input type="text" id="inputUsername" class="form-control" placeholder="Username" name="username" required autofocus>
+        <input type="email" id="inputEmail" class="form-control" placeholder="Email Address" name="email" required>
+        <input type="password" id="inputPassword" class="form-control" placeholder="Password" name="password" required>
+        <div class="checkbox">
+            <label><input type="checkbox" name="hidden">Hide My Scores</label>
+        </div>
+        <button class="btn btn-lg btn-primary btn-block" type="submit">Register</button>
+    </form>
+</div>
+<!-- END Login/Register pages -->
+
+
+<!-- START Login/Logged out pages -->
+        <div class="topBar">
+            <ul class="pull-left">
+                <a href="Homepage.html"> <img src = "images/FULL_LOGO.png" height = "30">  </a> 
+                <input type="text" class="rounded" placeholder =  " &nbsp;Search for Flashcard Topics " name="tags">
+                <a href="#"><img class="searchIcon" src = "images/SearchIcon.png" height = "20">
+                </a>
+            </ul>
+            <ul class="pull-right logged-in-box">
+                <a href = "profile.html"> <button type="button" class="btn btn-primary btn-sm leftButtonPos">Profile</button></a> 
+                <a> <button id="logout"type="button" class="btn btn-primary btn-sm rightButtonPos">Log Out</button></a> 
+            </ul>
+            <ul class="pull-right logged-out-box">
+                <button id="login" name="submit" type="submit" class="btn btn-primary btn-sm leftButtonPos">Login</button>
+                <button id="register" name="submit" type="submit" class="btn btn-primary btn-sm rightButtonPos">Sign Up</button>
+            </ul>
+        </div>
+
+<!-- END Login/Logged out pages -->
+
+
+        <div id="nav-side">
+            <a href = "Study_Set.html"> <button type="button" class="btn btn-primary btn-lg backButton">Back to Set</button></a>
+        </div>
+
+
+    <div class="card_layout">
+        <div class="flashcard">
+            <div class="front" display="block">
+                <br />
+                <div class="question" id="question"></div>
+                <br />
+                <div class="answers" id="answers" style="text-align:center;">
+                    <button hidden class="choice" type="submit" id="choice1" onclick="choiceClick(this)">Choice 1</button><br />
+                    <button hidden class="choice" type="submit" id="choice2" onclick="choiceClick(this)">Choice 2</button><br />
+                    <button hidden class="choice" type="submit" id="choice3" onclick="choiceClick(this)">Choice 3</button><br />
+                    <button hidden class="choice" type="submit" id="choice4" onclick="choiceClick(this)">Choice 4</button><br />
+                </div> 
+            </div>
+        </div>
+        
+        <div class="swipe">
+            <div class="progress">
+                <div class="progress-bar progress-bar-striped active" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" style="width: 0%">
+                </div>
+            </div>
+        </div>
+        
+        <div id="timerArea">
+            <h1 align="center"><timer id="theTime" ng-app="timer" autostart="false" interval="10">{{minutes}}:{{seconds}}:{{millis % 1000}}</timer></h1>
+            <button id="startBtn" onclick="start()">Start</button>
+            <button hidden id="leaderBtn">Leaderboards</button>
+<!--            <button onclick="resumeTimer()">Resume Timer</button>-->
+        </div>
+    </div>
+    
+<br/>
+</body>
+</html>

@@ -1,0 +1,187 @@
+<html>
+    <head>
+        <title>Gold Team</title>
+    </head>
+    <body bgcolor=gold>
+        <script src="../routes/create.js" type="text/javascript"></script>
+        <script src="../routes/search.js" type="text/javascript"></script>
+        <script src="../routes/update.js" type="text/javascript"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/jquery-ui.min.js"></script>
+        <script src="../views/login.js" type="text/javascript"></script>
+        <link href="../node_modules/bootstrap/dist/css/bootstrap.css" rel="stylesheet">
+        <link href="../node_modules/bootstrap-social/assets/css/font-awesome.css" rel="stylesheet">
+        <link href="../node_modules/bootstrap-social/assets/css/docs.css">
+        <link href="../node_modules/bootstrap-social/bootstrap-social.css" rel="stylesheet">
+        <link href="css/login.css" rel="stylesheet">
+       
+       
+        <table border="0" cellpadding="10">
+            <tr>
+                <td>
+                    <img src="images/gold.png">
+                </td>
+                <td>
+                    <h1>Gold Team Rules</h1>
+                </td>
+            </tr>
+        </table>
+        <div class="cover"></div>
+        <div class="loginpopup">
+            <form id="loginform" class="form-signin" action="/api/login" method="POST" onsubmit="submitLogin();return false;">
+                <h2 class="form-signin-heading">Please Log In</h2>
+        <label id="loginError" color="red"></label><br/>
+                <input type="text" id="inputUsername" class="form-control" placeholder="Username" name="username" required autofocus>
+                <input type="password" id="inputPassword" class="form-control" placeholder="Password" name="password" required>
+                <button class="btn btn-lg btn-primary btn-block" type="submit">Log In</button>
+		<table style="margin-top: 10px">
+			<tr>
+				<td width="50%" style="padding: 3px">
+					<a href="/auth/google" class="btn btn-block btn-social btn-google-plus">
+              <i class="fa fa-google-plus"></i>
+              Google+
+            </a>
+				</td>
+				<td width="50%" style="padding: 3px">
+		<a href="/auth/facebook" class="btn btn-block btn-social btn-facebook">
+                    <i class="fa fa-facebook"></i>
+                    Facebook
+                    </a>
+				</td>
+			</tr>
+		</table>
+            </form>
+        </div>
+        <div class="registerpopup">
+            <form id="registerform" class="form-signin" action="/api/register" method="POST" onsubmit="submitRegister();return false;">
+                <h2 class="form-signin-heading">User Registration</h2>
+                <input type="text" id="inputUsername" class="form-control" placeholder="Username" name="username" required autofocus>
+                <input type="email" id="inputEmail" class="form-control" placeholder="Email Address" name="email" required>
+                <input type="password" id="inputPassword" class="form-control" placeholder="Password" name="password" required>
+                <div class="checkbox">
+                    <label><input type="checkbox" name="hidden">Hide My Scores</label>
+                </div>
+                <button class="btn btn-lg btn-primary btn-block" type="submit">Register</button>
+            </form>
+        </div>
+        <button id="login">Log In</button>
+        <br>
+        <button id="register">Register</button>
+        <form action="/logout" method="get">
+            <div>
+                <input type="submit" value="Log Out" />
+            </div>
+        </form>
+        <br />
+        <h3>Pre-requisites for Testing</h3>
+        <p><ol>
+            <li>Have cards in a database; can be made through <a href="Create_New_Cards.html">Create cards Page</a></li>
+            <li>Search for it through <a href="Homepage.html">Homepage</a></li>
+            <li>Study it by clicking the study button from the search results page</li>
+            <li>Compete with it by clicking on the Challenge button on the study page</li>
+        </ol></p>
+        <br />
+        <h4>Development Links:</h4>
+        <p>
+            <br />
+            <a href="Homepage.html">Homepage</a>
+            <br />
+            <!--a href="Create_New_Set.html">Create New Set</a>
+            <br /-->
+            <a href="My_Sets.html">My Sets</a>
+			<br />
+<!--			<a href="Card_Viewer_Tentative.html">Study a set</a>-->
+<!--			<br />-->
+            <a href="Study_Card.html">Study a set</a>
+            <br />
+            <a href="profile.html">Profile</a>
+            <br />
+            <!--a href="jess_index.html">Create a set TEST</a> 
+            <br /-->
+            <a href="Create_New_Cards.html">Create cards Page</a> 
+            <br />
+            <a href="edit_a_set.html">Edit cards Page</a>
+            <br />
+            <a href="competition.html">Competition Page</a>
+        </p>
+        <br />
+        
+        
+        <br />
+        <div ng-app="">
+            <table border="0" cellpadding="0">
+                <tr>
+                    <td>
+                        <p>Question:</p>
+                    </td>
+                    <td>
+                        <input id="tbQuestion" type="text" ng-model="question">
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <p>Solution:</p>
+                    </td>
+                    <td>
+                        <input id="tbSolution" type="text" ng-model="solution">
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <p>Answers</p>
+                    </td>
+                    <td>
+                        <input id="tbAnswers" type="text" ng-model="answers">
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <p>Tags:</p>
+                    </td>
+                    <td>
+                        <input id="tbTags" type="text" ng-model="tags">
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <p>Type:</p>
+                    </td>
+                    <td>
+                        <input id="tbType" type="text" ng-model="type">
+                    </td>
+                </tr>
+            </table>
+            <button type="submit"
+                onclick="createFlashCard(
+                    document.getElementById('tbQuestion').value,
+                    document.getElementById('tbSolution').value,
+                    document.getElementById('tbType').value,
+                    document.getElementById('tbAnswers').value,
+                    document.getElementById('tbTags').value)">Create</button>
+        </div>
+        <div>
+            <button type="submit"
+                onclick="
+                    var http = new XMLHttpRequest();
+                    http.open('GET', '/api/searchcards', false);
+                    http.send();
+                    document.getElementById('list').textContent = http.responseText;">List Flash Cards</button>
+                    <br/>
+                    <label id="list"></label>
+        </div>
+        <div>
+            <input id="tbSearch" type="text">
+            <button type="submit"
+            onclick="searchCardsByTags(document.getElementById('tbSearch').value, function(response){document.getElementById('searchresults').textContent = response;})">Search</button>
+                <label id="searchresults"></label>
+        <input id ="tbSearch2" type="text">
+        <button type="submit"
+            onclick="searchCards('','','','',document.getElementById('tbSearch2').value, function(result){document.getElementById('searchresults2').textContent = result;})">Search2</button>
+        <label id="searchresults2"></label>
+        <input id ="tbSearch3" type="text">
+        <button type="submit"
+            onclick="getById(document.getElementById('tbSearch3').value, function(result){document.getElementById('searchresults3').textContent = result;})">SearchById</button>
+        <label id="searchresults3"></label>
+        </div>
+    </body>
+</html>

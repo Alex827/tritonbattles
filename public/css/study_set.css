@@ -1,0 +1,55 @@
+
+.set_name{
+	position: absolute;
+	top: 100px;
+	left: 10px;
+}
+.image1{
+	position: absolute;
+	left: 40%;
+	top: 150px;
+}
+.study_button{
+	position: absolute;
+	top: 100px;
+	left: 350px;
+}
+
+.study_button a:link, .study_button a:visited{
+	color: white;
+	text-decoration: none;
+	cursor: auto;
+}
+
+
+.challenge_button{
+	position: absolute;
+	top: 150px;
+	left: 350px;
+}
+.favorite_button {
+	position:absolute;
+}
+
+@media screen and (max-width: 900px) {
+
+    .image1 {
+        top: 200px;
+        left: 50%;
+        margin-left:-200px;
+    }
+    .study_button {
+    	left: 25px;
+    	top: 300px;
+    }
+    .challenge_button {
+    	left:25px;
+    	top: 340px;
+    }
+    .favorite_button {
+    	left:25px;
+    	top:260px;
+    }
+    
+}
+

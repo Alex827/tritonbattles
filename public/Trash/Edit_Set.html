@@ -1,0 +1,77 @@
+<!-- This file allows users to add/remove cards from a set -->
+<!doctype html>
+<html>
+	<head>
+	<link rel="stylesheet" href="css/edit_set.css">
+	<!-- INCLUDE THE ANGULAR JS LIBRARY -->
+	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+	<script type="text/javascript" src="/js/editSet.js"></script>
+	</head> 
+	<body ng-app="myApp"> 
+		<body class="body">
+			<div class="navBar">			
+				<ul>
+					<li><a href="#">Triton Battles</a></li>
+					<li><a href="#">Profile</a></li>
+				</ul>
+
+            <!-- HTML for SEARCH BAR -->
+            	<div>
+		            <input id="tbSearch" type="text">
+		            <button type="submit"
+		            onclick="searchCardsByTags(document.getElementById('tbSearch').value, function(response){document.getElementById('searchresults').textContent = response;})">Search</button>
+	        	</div>
+            </div>
+			
+			<!-- Mid section of the page -->
+			<div class="main" ng-controller="MainController">
+			<div class="topButtons">
+				<input type="button" onclick="results" value="Back to search results">
+				<br>
+				<input type="button" onclick="window.location.href='viewSets.html'" value="Back to set">
+				<br>
+			</div>
+				<div class="cardContainer">
+					<!--<h1>{{ title }}</h1> -->
+						<div class="card">
+							
+							<div class="question">
+								<h1>Question:</h1>
+								<input type="text" name="Question">
+								<br>
+							</div>
+							
+							<div class="answers">
+								<h1>Answers:</h1>
+								<div id="formz">
+
+								</div>
+								<div id="nl"></div>
+								<input type="text" id="txtName" style="color:#888;" value="Type your answer here" onfocus="inputFocus(this)" onblur="inputBlur(this)" />
+								<input type="button" value="Add" id="btnSave"/>
+							</div>
+
+							<div class="modes">
+								<input type="button" onclick="" value="Multiple Choice">
+								<input type="button" onclick="" value="Short Answers">
+								<input type="button" onclick="" value="Code">
+							</div> 
+
+						</div>
+				</div>
+			</div>
+
+			<div class="footer">
+				<div class="container">
+					<h2> Important links </h2>	
+				</div>			
+			</div>
+
+			<!-- Modules --> 
+			<script src="cardViewer.js"> </script>
+
+			<!-- Controller -->
+			<script src="js/controllers/MainController.js"></script>
+		</body>
+	</body>
+</html>

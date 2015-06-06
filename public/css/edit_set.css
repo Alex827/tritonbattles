@@ -1,0 +1,67 @@
+/*.setTitleHolder {
+
+	background-color: #0066FF;
+
+} 
+
+.footer {
+	background-color: #0066FF;
+} */
+.navBar ul{
+	list-style-type: none;
+	margin: 0;
+	padding: 0;
+	overflow: hidden;
+
+}
+
+.navBar li {
+	float: left;
+}
+
+/*.navBarLeft li {
+	float: left;
+	display: inline;
+}
+.navBarRight li {
+	float: right;
+} */
+.navBar a {
+	display: block;
+    width: 125px;
+    /*background-color: #dddddd;*/)
+}
+.cardContainer {
+	display: block;
+	padding-top: 2%;
+	padding-bottom: 5%;
+}
+
+
+.body {
+	font-family: "Arial", Arial, Sans-serif;
+	background-color:#0066FF;
+}
+
+.main {
+	padding: 5%; 
+	background-color:#C8C8C8;
+	/*border: 30px;*/
+}
+
+/* The actual card itself*/
+.card {
+	background-color:#FFFFFF; 
+	padding: 2%;
+	margin-left: 5%;
+	margin-right: 50%;	
+}
+
+.navBar h2 {
+	display:inline-block; 
+}
+
+.modes{
+	padding-top: 50px;
+}
+

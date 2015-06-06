@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+	<head>
+
+		<link rel="stylesheet" type="text/css" href="css/study_card.css">
+		<link rel="stylesheet" type="text/css" href="css/basicboot.css">
+		
+		<script type="text/javascript" src="js/flashcardJS.js"></script>
+        <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+        <link rel="stylesheet" href="css/bootstrap3.3.4.min.css">
+	</head>
+	<body>
+		<!--navbar-->
+		<div class="topBar">
+			<ul class="pull-left">
+                 <form action="Search_Results_Signed.html" method="GET">
+                    <a href="Homepage.html"> <img src = "images/FULL_LOGO.png" height = "30">  </a> 
+               
+                    <input type="text" class="rounded" placeholder = " &nbsp;Search for Flashcard Topics " name="tags">
+                    <a href="#"><img class="searchIcon" src = "images/SearchIcon.png" height = "20">
+                    </a>
+                </form>
+            </ul>
+			<ul class="pull-right">
+                <a href = "My_Sets.html"> <button type="button" class="btn btn-primary btn-sm leftButtonPos">Profile</button></a> 
+                <a href="Homepage.html">  <button type="button" class="btn btn-primary btn-sm rightButtonPos">Log Out</button></a> 
+            </ul>
+		</div> 	
+		
+		<div class="Back_to_Search">
+			<a href = "Study_Set.html"><button type="button" class="btn btn-primary btn-lg">Back to Set</button></a>
+		</div>
+
+        <div id="nav-side">
+            <a href = "Study_Set.html"> <button type="button" class="btn btn-primary btn-lg backButton">Back to Set</button></a>
+        </div>
+
+		<div class="card_layout">
+			<div class="flashcard">
+				<div class="flipper">	
+					<div class="front">
+						Front of the card. <strong>Click to flip.</strong>
+					</div>
+					<div class="back">
+						Back of the card. <strong>Click to flip back.</strong>
+					</div>
+				</div>
+			</div>
+			<div class = "swipe">
+				<div class="progress">
+   					<div class="progress-bar progress-bar-striped active" role="progressbar" aria-valuenow="40" aria-valuemin="0" aria-valuemax="100" style="width:40%">
+    				</div>
+ 				</div>
+
+ 				<div class = "next_previous_card">
+ 				 	<button type="button" class="btn btn-default">Previous</button>
+ 				 	<button type="button" class="btn btn-default">Next</button>
+ 				</div>
+			</div>
+		</div>	
+	</body>
+</html>

@@ -1,0 +1,83 @@
+
+.nav-side {
+	background-color: #eeeeee;
+	height: 100%;
+	position: absolute;
+	top: 50px;
+	text-align: center;
+}
+
+.set{
+	position:absolute;
+	left: 360px;
+	top: 55px;
+}
+.nav-side .btn{
+	margin-top: 10;
+}
+
+.profile-body {
+	top: 55px;
+}
+
+#Favorites1 {
+
+}
+
+#Favorites2 {
+
+}
+
+#Favorites3 {
+
+}
+
+#section p {
+	font-size:30px;
+}
+
+@media screen and (max-width: 900px) {
+
+	#section {
+		padding-left:0px;
+		margin-left:-200px;
+		top:300px;
+	}
+	
+	#section p {
+		font-size:20px;
+		padding-left:30px;
+	}
+	
+	.nav-side {
+		height:450px;
+		width:100%;
+		top:80px;
+	}
+	.set {
+		top:550px;
+		left:50%;
+		margin-left:-120px;
+	}
+	
+}
+
+.deckLink {
+	position: relative;
+	width: 100%;
+}
+
+.deckLink .image {
+	margin-left: auto;
+	margin-right: auto;
+	z-index: -1;
+}
+
+.deckLink .caption {
+	position: absolute;
+	top: 30%;
+	margin-left: auto;
+	margin-right: auto;
+	padding-left: 15%;
+	z-index: 1;
+}

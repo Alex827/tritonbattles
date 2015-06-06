@@ -1,0 +1,74 @@
+<!doctype html>
+<html>
+    <head>
+    <link rel="stylesheet" href="css/card_viewer_tentative.css">
+    <!-- Modules --> 
+    <!-- jQuery -->    
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+    
+
+    </head> 
+    <body ng-app="myApp"> 	
+        <body class="body">
+            <div class="navBar">			
+                <ul>
+                    <li><a href="List_Of_Links.html">Triton Battles</a></li>
+                    <li><a href="#">Profile</a></li>
+                </ul>
+
+            <!-- HTML for SEARCH BAR -->
+                <div>
+            <input id="tbSearch" type="text">
+            <button type="submit"
+            onclick="searchCardsByTags(document.getElementById('tbSearch').value, function(response){document.getElementById('searchresults').textContent = response;})">Search</button>
+        </div>
+            </div>
+
+            <!-- Mid section of the page -->
+            <div class="main" ng-controller="MainController">
+            <div class="topButtons">
+                <button><h3> Back to search results </h3></button>
+                <br />
+                <button><h3> Back to set </h3></button>
+                <br />
+                <button onclick="nextCard()"> <strong>Start Studying</strong></button>  
+                <button onclick="flipCard()">Flip</button>
+            </div>
+            <div class="cardContainer" style="width: 550px; position:relative;">
+                <p align="right" style="position: relative; top: 34px"><strong>Tags:</strong> </p>
+                <div class="card">
+                    <div class="flashcard">
+                        <div class="flipper">
+                            <div class="front active" display="block">
+                                <br />
+                                <div class ="question" id="question"></div>
+                                <br />
+                                <div class="answers" id="answers">
+                                    <button hidden class="choice" type="submit" id="choice1" onclick="choiceClick(this)">Choice 1</button><br />
+                                    <button hidden class="choice" type="submit" id="choice2" onclick="choiceClick(this)">Choice 2</button><br />
+                                    <button hidden class="choice" type="submit" id="choice3" onclick="choiceClick(this)">Choice 3</button><br />
+                                    <button hidden class="choice" type="submit" id="choice4" onclick="choiceClick(this)">Choice 4</button><br />
+                                </div> 
+                            </div>
+                            <div class="back"> 
+                                <p style="padding-top: 10%"><strong>Solution:</strong></p>
+                                <br />
+                                <p id="solution"></p>
+                            </div>
+                        </div>
+                    </div>     
+                </div>
+                    <button type="button" id="lastButton" value="Button" onclick="lastCard()">Last</button>
+                    <button type="button" id="nextButton" value="Button" onclick="nextCard()" style="float: right">Next</button>
+            </div>
+            </div>
+
+            <div class="footer">
+                <div class="container">
+                    <h2> Important links </h2>	
+                </div>			
+            </div>
+<script type="text/javascript" src="card_viewer.js"></script>
+        </body>
+    </body>
+</html>

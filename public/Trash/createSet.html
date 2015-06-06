@@ -1,0 +1,79 @@
+<!-- This file allows users to create a new set -->
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>Study</title>
+
+    <!-- Bootstrap CSS -->
+    <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Font Awesome CSS -->
+    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
+
+    <!-- Custom CSS -->
+    <link href="css/createSet.css" rel="stylesheet">
+
+    <!-- Custom JS -->
+    <script src="js/createSet.js"></script>
+    <script src="../routes/create.js"></script>
+
+  </head>
+
+  <body>
+    <!-- NAVBAR GOES HERE -->
+    <div class="container">
+      <form class="form-horizontal" onsubmit= "return createSet()" >
+      <fieldset>
+
+      <!-- Form Name -->
+      <legend>Create a New Set</legend>
+
+      <!-- Text input-->
+      <div class="control-group">
+        <label class="control-label" for="title">Title</label>
+        <div class="controls">
+          <input id="title" name="title" type="text" placeholder="eg. Midterm 1 or Algorithms Quiz" class="input-xlarge" required="">
+          <p class="help-block">A title to distinguish your set from others</p>
+        </div>
+      </div>
+
+      <!-- Text input-->
+      <div class="control-group">
+        <label class="control-label" for="class">Class</label>
+        <div class="controls">
+          <input id="class" name="class" type="text" placeholder="eg. CSE 110 or ECON 15" class="input-xlarge" required="">
+          <p class="help-block">The class this set will be used to study for</p>
+        </div>
+      </div>
+
+      <!-- Text input-->
+      <div class="control-group">
+        <label class="control-label" for="tags">Tags</label>
+        <div class="controls">
+          <input id="tags" name="tags" type="text" placeholder="eg. #midterm or #java" class="input-xlarge">
+          <p class="help-block">Tags to allow searching functionality</p>
+        </div>
+      </div>
+
+      <!-- Button -->
+      <div class="control-group">
+        <label class="control-label" for="submitBtn"></label>
+        <div class="controls">
+          <button id="submitBtn" name="submitBtn" class="btn btn-primary">Create Set!</button>
+        </div>
+      </div>
+
+      </fieldset>
+      </form>
+    </div>
+
+    <!-- Bootstrap core JavaScript -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+    <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+
+  </body>
+</html>

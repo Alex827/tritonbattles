@@ -1,0 +1,19 @@
+.loginBox {
+    width: 345px;
+    padding: 25px;
+    background-color: #0099FF;
+    margin: 25px;
+    left:50%;
+    margin-left:-200px;
+    position: absolute;
+    top:100px;
+    color:white;
+}
+.loginQuestion {
+	top:560px;
+	position:absolute;
+	left:50%;
+	margin-left:-150px;
+	z-index:5;
+	color:blue;	
+}

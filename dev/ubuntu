@@ -1,0 +1,13 @@
+printf "Updating package manager server list...\n"
+apt-get update > /dev/null
+printf "Installing nodejs and mongodb...\n"
+apt-get install nodejs mongodb > /dev/null
+printf "Creating /data/db directory that mongo uses by default...\n"
+mkdir -p /data/db > /dev/null
+printf "Moving to parent directory...\n"
+cd .. > /dev/null
+printf "Installing any missing dependencies that we require...\n"
+sudo -u $USER npm install > /dev/null
+printf "Finished installing dependencies.\n"
+printf "\n\nPlease make sure the mongod service is running and accepting connections on the default port (27017) before starting the webserver."
+printf "\n\nTo start the webserver run: \nnode server.js\nin the standard directory and then to connect to it open your browser and navigate to:\nlocalhost:port\nWhere port is the port printed when starting up node."

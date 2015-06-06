@@ -1,0 +1,246 @@
+/*body {
+	background:#ffffff;
+	margin:0;
+	padding:0;
+	border:0;
+}
+#header {
+	width:9000px; 
+	height:50px;
+	margin:0;
+	padding:0;
+	border:0;
+	background:#477DFC;
+}
+*/
+
+.cardContainer {
+    width:500px;
+    height:50px;
+    position:fixed;
+    top:15%;
+    right:5%;
+}
+/*
+.question-area {
+	width:500px;
+	height:170px;
+	position:fixed;
+	top:165px;
+	right:100px;
+}
+*/
+/*
+.answer-area{
+	width:500px;
+	height:170px;
+	float:right;
+	position:fixed;
+	top:360px;
+	right:100px;
+}
+*/
+.topbar {
+	display: inline;
+}
+#createSet{
+	position:fixed;
+	top:50px;
+	left:600px;
+}
+#yourCards{
+	position:fixed;
+	left:280px;
+	top:100px;
+}
+#newCard{
+	position:fixed;
+	right:275px;
+	top:100px;
+}
+.title2 {
+	width:500px;
+	height:170px;
+	position:fixed;
+	top:165px;
+	right:100px;
+}
+.content2{
+	width:500px;
+	height:170px;
+	float:right;
+	position:fixed;
+	top:360px;
+	right:100px;
+}
+.content3{
+    width:500px;
+    height:50px;
+    float:right;
+    position:fixed;
+    top:360px;
+    right:100px;
+}
+
+.MCButton{
+	float:right;
+	position:fixed;
+	right:410px;
+	top:550px;
+}
+.SAButton{
+	float:right;
+	position:fixed;
+	right:300px;
+	top:550px;
+}
+
+.proButton{
+	float:right;
+	position:fixed;
+	right:190px;
+	top:550px;
+}
+.saveButton{
+	float:right;
+	position:fixed;
+	left:300px;
+	top:550px;
+}
+.allCards{
+	background:#F5F24E;
+	position:fixed;
+	top:100px;
+	left:50px;
+	margin:50px;
+	padding:10px;
+	border:1px solid #ccc;
+	font:16px/26px Georgia, Garamond, Serif;
+	overflow:auto;
+}
+/*////////////////////////////////////////*/
+.question{
+    /*margin-top: 1%;
+    margin-bottom: 1%;*/
+}
+.answers {
+    width:30px;
+    height:60px;
+    position: relative;
+    color: white;
+}
+#choice1 {
+    width:500px;
+    height:41px;
+    background: transparent;
+    font-size: 12px;
+    padding: 10px 30px;
+    border-radius: 5px;
+    -moz-border-radius: 5px;
+    -webkit-border-radius: 5px;
+    border: 1px solid rgba(0,0,0,0.3);
+    border-bottom-width: 3px;
+}
+
+#choice1:hover{
+    border-color: rgba(0,0,0,0.5);
+}
+#choice2 {
+    width:500px;
+    height:41px;
+    background: transparent;
+        font-size: 12px;
+    padding: 10px 30px;
+    border-radius: 5px;
+    -moz-border-radius: 5px;
+    -webkit-border-radius: 5px;
+    border: 1px solid rgba(0,0,0,0.3);
+    border-bottom-width: 3px;
+}
+#choice2:hover{
+    border-color: rgba(0,0,0,0.5);
+}
+#choice3 {
+    width:500px;
+    height:41px;
+    background: transparent;
+    font-size: 12px;
+    padding: 10px 30px;
+    border-radius: 5px;
+    -moz-border-radius: 5px;
+    -webkit-border-radius: 5px;
+    border: 1px solid rgba(0,0,0,0.3);
+    border-bottom-width: 3px;
+}
+#choice3:hover{
+    border-color: rgba(0,0,0,0.5);
+}
+#choice4 {
+    width:500px;
+    height:43px;
+    background: transparent;
+    font-size: 12px;
+    padding: 10px 30px;
+    border-radius: 5px;
+    -moz-border-radius: 5px;
+    -webkit-border-radius: 5px;
+    border: 1px solid rgba(0,0,0,0.3);
+    border-bottom-width: 3px;
+}
+#choice4:hover{
+    border-color: rgba(0,0,0,0.5);
+}
+
+.navBar h2 {
+	display:inline-block; 
+}
+
+/* entire card, keeps perspective */
+.flashcard {
+    perspective: 1000;
+    border: 1px solid;
+}
+
+/* flip the card when mouse over */
+/*
+.flashcard:hover .flipper, .flashcard.hover .flipper {
+    transform: rotateY(180deg);
+}
+*/
+
+
+.flashcard, .front, .back {
+    width: 500px;
+    height: 245px;
+}
+
+/* flip speed */
+.flipper {
+    transition: 0.3s;
+    transform-style: preserve-3d;
+    position: relative;
+}
+
+/* hide back of card during flip */
+.front, .back {
+    text-align: center;
+    backface-visibility: hidden;
+    -webkit-backface-visibility: hidden;
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+
+/* front, placed above back */
+.front {
+    z-index: 2;
+    transform: rotateY(0deg);
+    background-color: white;
+}
+
+/* back, initially hidden */
+.back {
+    transform: rotateY(180deg);
+    /*background-color: #DBE9FF;*/
+    background-color: white;
+}

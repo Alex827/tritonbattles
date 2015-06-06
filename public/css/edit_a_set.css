@@ -1,0 +1,36 @@
+.container{
+    border-bottom: 1px solid gray;
+    position:relative;
+}
+.question{
+    font-size: 16px;
+    font-weight: bold;
+    position:relative;
+}
+.answer{
+    color: #0000ff;
+}
+.cardContainer {
+	position:absolute;
+	top:150px;
+	left:700px;
+}
+.allCards {
+	position:absolute;
+	left:10px;
+	top:150px;
+}
+.cardsList{
+	position:absolute;
+	top:700px;
+	left:10px
+}
+#card_set {
+	background-color: #F5F24E;
+	width:100%;
+}
+#pageTitle {
+	position:absolute;
+	top:100px;
+	left:50px;
+}
