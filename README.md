@@ -28,6 +28,17 @@ Technologies
 4. HTML
 5. AngularJS
 
+*Testing Frameworkc*
+-------------------
+We are using Jasmine to write our unit tests and Karma as the framework to run the tests.
+Instructions to run tests:
+	1. Install node 
+	2. Run the command: npm install -g karma-cli (IF UNSUCCESSFUL RUN command with sudo[sudo npm install...])
+	3. Run the command: karma start my.conf.js
+	4. A chrome window will pop up and the results of the tests we wrote will show in the console
+	Note: Our tests are in test_front_end.js and test_back_end.js
+
+
 To Test
 -------
 If you are on Ubuntu you should be able to navigate to the top folder and execute 'sudo bash dev/ubuntu' and it should setup your installation to run the mongo service, nodejs server, and connect to it.

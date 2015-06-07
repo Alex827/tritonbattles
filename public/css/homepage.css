@@ -1,3 +1,8 @@
+.boxed {
+	position: absolute;
+	right:50%;
+	top: 550px;
+}
 .Title {
 	text-align: center;
 	vertical-align: middle;
@@ -5,7 +10,6 @@
 	height:180px;
 	font-size: 50px;
 	padding-top:25px;
-
 }
 .About {
 	width:1000px;

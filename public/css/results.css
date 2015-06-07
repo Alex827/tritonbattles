@@ -1,10 +1,11 @@
 .rectangle{
 
 	left:50%;
-	top:200;
+	top:200px;
+	width:400px;
 	margin-left:-200px;
 	position:absolute;
-	border:2px solid #000;
+	border:10px solid #F0F0F0;
 }
 
 .page_head{
@@ -34,7 +35,12 @@
 .Options input {
 	border-radius: 10px;
 }
-
+.buttons{
+	position:absolute;
+	top:490px;
+	left:50%;
+	margin-left: -215px;
+}
 @media screen and (max-width: 700px) {
 
 	.page_head {

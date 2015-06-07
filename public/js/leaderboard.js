@@ -7,7 +7,10 @@ $.getScript("../../routes/search.js", function() {
 // updates the leaderboard
 function updateLeaderB() {
     // get the tags
+    var check = false;
     var tags = GetURLParameter("tags");
+    var deckid = GetURLParameter("deck");
+    
     // DOM elements
     var usersToChange = document.getElementsByClassName("user");
     var scoresToChange = document.getElementsByClassName("score");
@@ -43,6 +46,10 @@ function GetURLParameter(sParam) {
             return sParameterName[1];
         }
     }
+}
+
+function goBack() {
+    window.history.back();
 }
 
 // updates the leaderboard on page load

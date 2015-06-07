@@ -1,26 +1,31 @@
 
 //This is the function that closes the pop-up
 function endBlackout1(){
-$(".blackout").css("display", "none");
-$(".msgbox1").css("display", "none");
+if($(".blackout").css("display", "none")&&
+	$(".msgbox1").css("display", "none"))
+	return true;
+ 
 }
 
 //This is the function that closes the pop-up
 function endBlackout2(){
-$(".blackout").css("display", "none");
-$(".msgbox2").css("display", "none");
+if($(".blackout").css("display", "none")&&
+	$(".msgbox2").css("display", "none"))
+	return true;
 }
 
 //This is the function that starts the pop-up
 function strtBlackout1(){
-$(".msgbox1").css("display", "block");
-$(".blackout").css("display", "block");
+if($(".msgbox1").css("display", "block")&&
+	$(".blackout").css("display", "block"))
+	return true;
 }
 
 //This is the function that starts the pop-up
 function strtBlackout2(){
-$(".msgbox2").css("display", "block");
-$(".blackout").css("display", "block");
+if($(".msgbox2").css("display", "block")&&
+	$(".blackout").css("display", "block"))
+	return true;
 }
 
 //Sets the buttons to trigger the blackout on clicks

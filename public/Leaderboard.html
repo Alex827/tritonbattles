@@ -1,28 +1,12 @@
 <!DOCTYPE html>
 <html>
 <head>
-<!--    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css"> -->
-    <link rel="stylesheet" type="text/css" href="css/leaderboard.css">
     <link rel="stylesheet" type="text/css" href="css/basicboot.css">
     <link rel="stylesheet" type="text/css" href="css/login.css">
     <link rel="stylesheet" type="text/css" href="css/sign_up.css">
     <link rel="stylesheet" type="text/css" href="css/popUp.css">
-    
-<!--
-        <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
-        <script src= "//ajax.googleapis.com/ajax/libs/angularjs/1.3.14/angular.min.js"></script>
--->
-<!--    <script src="http://code.jquery.com/jquery-latest.js"></script>-->
-<!--    <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/jquery-ui.min.js"></script>-->
-<!--	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css"> -->
-<!--
-	<link rel="stylesheet" type="text/css" href="css/leaderboard.css">
-	<link rel="stylesheet" type="text/css" href="css/basicboot.css">
--->
-<!--
-    <link rel="stylesheet" type="text/css" href="css/login.css">
-    <link rel="stylesheet" type="text/css" href="css/sign_up.css">
--->
+    <link rel="stylesheet" type="text/css" href="css/leaderboard.css">
+
     <!--NEED THE BELOW CODE FOR MAC USERS-->
     <script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
     <link rel="stylesheet" href="css/bootstrap3.3.4.min.css">
@@ -79,12 +63,12 @@
 <!-- START Login/Logged out pages -->
         <div class="topBar">
             <ul class="pull-left">
-               <form action="Search_Results.html" method="GET">
-                <a href="Homepage.html"> <img src = "images/FULL_LOGO.png" height = "30">  </a> 
-                <input type="text" class="rounded" placeholder =  " &nbsp;Search for Flashcard Topics " name="tags">
-                <a href="#"><img class="searchIcon" src = "images/SearchIcon.png" height = "20">
-                </a>
-              </form>
+               <form action="Search_Results.html" method="GET" id="form1">
+                  <a href="Homepage.html"> <img src = "images/FULL_LOGO.png" height = "30">  </a> 
+                  <input type="text" class="rounded" placeholder =  " &nbsp;Search for Flashcard Topics " name="tags">
+                  <button type="submit" form="form1" formaction="Search_Results.html" formmethod="GET"><img class="searchIcon" src = "images/SearchIcon.png" height = "20"></button>
+                  </a>
+                </form>
             </ul>
             <ul class="pull-right logged-in-box">
                 <a href = "profile.html"> <button type="button" class="btn btn-primary btn-sm leftButtonPos">Profile</button></a> 
@@ -162,5 +146,6 @@
 	</tr>
 	</tbody>
 </div>
+    <button type="button" id="backBtn" onclick="goBack()"><strong>Back</strong></button>
 </body>
 </html>

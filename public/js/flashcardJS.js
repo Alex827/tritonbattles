@@ -10,13 +10,16 @@ var main = function() {
 			$(".flipper").css( {transform: "rotateY(180deg)"} );
 			$('.front').removeClass('.active');
 			$('.back').addClass('.active');
+			
 		}
 		else {
 			$('.flipper').css( {transform: "rotateY(0deg)"});
 			$('.back').removeClass('.active');
 			$('.front').addClass('.active');
+			
 		}
 	})
+	return true;
 
 }
 

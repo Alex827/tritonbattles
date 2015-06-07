@@ -22,8 +22,8 @@ module.exports = function(config) {
         // {pattern: 'public/js/lib/angular/ngkit.js', watch: false},
       'routes/search.js',
       'public/js/HelloWorld.js',
-      'public/js/card_viewer.js',
-      //'public/js/competition.js',
+      // 'public/js/card_viewer.js',
+      // 'public/js/competition.js',
       'public/js/script.js',
       'public/js/Search_Results.js',
       'public/js/view.js',
@@ -33,7 +33,8 @@ module.exports = function(config) {
       'public/js/favoriteSets.js',
       'public/js/edit_a_set.js',
       'public/js/createSet.js',
-      'public/test/*.js'
+      'public/test/*.js',
+      '/routes/*.js'
     ],
 
 

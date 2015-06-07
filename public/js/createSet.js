@@ -1,39 +1,16 @@
-// function createSet()
-// {
-//   var title = $('#title').val();
-//   var classVal = $('#class').val();
-//   var tags = $('#tags').val();
-
-//   //Send to createDeck()
-
-// }
-//question, solution, answers, tags, type
-
-//Need to find way of getting the solution and type from the webpage
-//Push this new object into the array cards
-//Once the user clicks createDeck we will send whatever is in cards to the database by looping
-//through cards and calling createCard on each one. Remember that the callback function will give us
-//a card ID and we need to save this in another array.
-//Once all the cards are created we call createDeck and pass in all the ID's that we got from our callback function
-//And hooray our deck is created
-//After this we need to do some minor stuff like user confirmation of creating the deck, providing a way
-//to access the deck the user just made and clearing all the fields on the page.
-//We also need to make it so that a user can view the deck that he/she is currently making on the left side of the page
-//where the index card is.
-//TLDR: 1. get all parameters we need for Dylan's method createCard
-//		2. Add all these cards to an array (cards)
-	//  3. Send to database with createCard and then createDeck with returned ID's
-	//	4. Less important implementation stuffs
-
-// the card array that holds the card ID's to make a deck out of it
-var cardIDArray = [];
-// the card ID to save into the array
-var cardIDToSave;
 // import
 $.getScript("../routes/create.js");
 $.getScript("../routes/search.js");
-
+// the card array that holds the card ID's to make a deck out of it
+var cardIDArray = [];
+// the card array for dynamic displaying
+var cardArray = [];
+// the card ID to save into the array
+var cardIDToSave;
+// time offset to change back to default status messgae
 var timeOffset = 1500;
+// index for cards made
+var indexCreate = 0;
 
 //NOTE TO SELF MAKE SURE THAT THE PATH NAME IS CORRECT FOR THIS
 function addCard()
@@ -112,10 +89,6 @@ function addCard()
     var encodedS = encodeURIComponent(solution);
     var encodedA = encodeURIComponent(answerArray);
     var encodedT = encodeURIComponent(tagsFromField);
-//    encodedA = answerArray;
-    //console.log(answerArray);
-    console.log(encodedA);
-    //return;
 
     // check to see if card in database
     searchCards(encodedQ, encodedS, type, encodedA, encodedT, function(result) {
@@ -123,7 +96,6 @@ function addCard()
         var cardID = result.slice(8);
         // if the card is in the database, then do not make card
         if( cardID !== "[]" ) {
-            //console.log("CANNOT MAKE: card already created");
             errStatusMessage("Card was already made. Please try again.");
             return;
         }
@@ -131,11 +103,11 @@ function addCard()
         else {
             // making the card
             createFlashCard(encodedQ, encodedS, type, encodedA, encodedT, function(result2) {
-                //console.log("card created: "+result2);
                 // format the result
                 cardID = result2.slice(8);
                 // parse as JSON object
                 cardID = JSON.parse(cardID);
+                cardArray.push(cardID);
                 // get the ID card tag
                 cardID = cardID["_id"];
                 // save the ID into a global variable to be passed back up for usage
@@ -147,12 +119,32 @@ function addCard()
 
     //put the card ID into an array to be used later for making a deck
     cardIDArray.push(cardIDToSave);
-    //console.log(cardIDArray);
-    newCard();
+    
+    updateCardArrInfo();
+    
+    // clear fields if checked
+    if( $("#clearCheckBox").prop('checked') ) {
+        newCard();
+    }
 }
 
 function addDeck() {
-    createDeck(cardIDArray, document.getElementById("deckTags").value, document.getElementById("deckTitle").value, function(e){}, false);
+    var deckTitleFromField = document.getElementById("deckTitle");
+    var deckTagsFromField = document.getElementById("deckTags");
+    
+    if( cardIDArray.length == 0 ) {
+        errStatusMessage( "Please create at least one card.");
+        return;
+    }
+    if( deckTitleFromField.value == "") {
+        errStatusMessage("Please enter a deck title.", $("#deckTitle"));
+        return;
+    }
+    if( deckTagsFromField.value == "" ) {
+        errStatusMessage("Please enter deck tag(s).", $("#deckTags"));
+        return;
+    }
+    createDeck(cardIDArray, deckTagsFromField.value, deckTitleFromField.value, function(e){}, false);
     var $statusM = $("#statusMessage");
 
     $statusM.html("<strong>Deck created!</strong>");
@@ -176,7 +168,7 @@ function errStatusMessage(string1, var1) {
     var $statusM = $("#statusMessage");
 
     $statusM.html("<strong>"+ string1 + "</strong>");
-    $statusM.css("color", "red");
+    $statusM.css("color", "white");
     if( var1 ) {
         var1.css("background-color","#FFCCCC");
         setTimeout( function() {
@@ -198,7 +190,6 @@ function successStatusMessage() {
 
 //Clears fields after adding cards
 function newCard(){
-    console.log("newcard button")
     document.getElementById("question-field").value=null;
     document.getElementById("question").innerHTML = "Question";
     document.getElementById("tag-field").value=null;
@@ -210,34 +201,110 @@ function newCard(){
     }
 }
 
-$('document').ready(function() {
-    var question = document.getElementById("question");
-    var $checkedRadio = $('input[type=radio][name=pickSolution]');
+// shows cards currently made next
+function nextCardCreate() {
+	if( indexCreate < cardIDArray.length ) {
+        $("#solution").css("visibility","hidden");
+        // DOM variables
+            console.log(indexCreate);
+        var numOfChoices = cardArray[indexCreate].answers.length;
+        var lastButton = document.getElementById("lastButton");
+        var nextButton = document.getElementById("nextButton");
+        var question = document.getElementById("question");
+        var solution = document.getElementById("solution");
 
-    // populate the question field
-    $('#question-field').bind('keyup keydown keypress', function() {
-        question.innerHTML = $('#question-field').val();
-    });
-    // populate the choices
-    $('#answer1').bind('keyup keydown keypress', function() {
-        $('#choice1').html( $('#answer1').val() );
-    });
-    $('#answer2').bind('keyup keydown keypress', function() {
-        $('#choice2').html( $('#answer2').val() );
-    });
-    $('#answer3').bind('keyup keydown keypress', function() {
-        $('#choice3').html( $('#answer3').val() );
-    });
-    $('#answer4').bind('keyup keydown keypress', function() {
-        $('#choice4').html( $('#answer4').val() );
-    });
-    // populate the solution
-    $checkedRadio.click( function() {
-        var correctSolution = $checkedRadio.filter(":checked").next();
-        $('#solution').html( correctSolution.val() );
+        // if on the back of the card when next is clicked, flip back to front
+        if( $('.back').hasClass('active') ) {
+            $('.flipper').css( {transform: "rotateY(0deg)"});
+            $('.back').removeClass('active');
+            $('.front').addClass('active');
+        }
 
-        correctSolution.bind('keyup keydown keypress', function() {
-            $('#solution').html( correctSolution.val() );
-        });
-    });
-});
+        // popluates the question
+        question.innerHTML = "<strong>"+cardArray[indexCreate].question+"</strong>";
+        // populates the choices
+        for(i = 0; i < numOfChoices; i++) {
+            choices[i].removeAttribute("hidden");
+            choices[i].innerHTML = cardArray[indexCreate].answers[i];
+            choices[i].innerHTML = choices[i].innerHTML.trim();
+        }
+
+        //Prevents extra showing of previous options
+        // also keeps it to only 4 multiple choices options
+        for(a = numOfChoices; a < 4; a++){
+            choices[a].setAttribute("hidden", true);
+        }
+        // populates the solution
+        solution.innerHTML = cardArray[indexCreate].solution;
+
+    //    tags.innerHTML = "Tags: "+cardArray[index].tags;
+        // reset choice backgrounds
+        document.getElementById("choice1").style.background = 'transparent';
+        document.getElementById("choice2").style.background = 'transparent';
+        document.getElementById("choice3").style.background = 'transparent';
+        document.getElementById("choice4").style.background = 'transparent';
+        
+		indexCreate++;
+        updateCardArrInfo();
+    }
+}
+
+// updates the card info area
+function updateCardArrInfo() {
+    // DOM variable
+    var cardArrStatus = document.getElementById("cardStatus");
+    // the two default messages
+    var defMess1 = "Your current card: ";
+    var defMess2 = " Total Cards: ";
+    // if there hasn't been a change then update
+////    if( cardArrStatus.innerHTML == defMess1 ) {
+//        cardArrStatus.innerHTML += indexCreate + defMess2 + cardArray.length;
+//    }
+    // update if there is a chagng
+//    else {
+        cardArrStatus.innerHTML = defMess1 + indexCreate + defMess2 + cardArray.length;
+//    }
+}
+
+// goes to prev card
+function lastCardCreate(){
+	//call next card to reduce code << good stuff using DRY :D
+	indexCreate -= 2; //subtract two
+	if(indexCreate < 0) {
+		indexCreate = 0;
+	}
+	nextCardCreate(); //nextCard
+}
+
+
+//$('document').ready(function() {
+//    var question = document.getElementById("question");
+//    var $checkedRadio = $('input[type=radio][name=pickSolution]');
+//
+//    // populate the question field
+//    $('#question-field').bind('keyup keydown keypress', function() {
+//        question.innerHTML = $('#question-field').val();
+//    });
+//    // populate the choices
+//    $('#answer1').bind('keyup keydown keypress', function() {
+//        $('#choice1').html( $('#answer1').val() );
+//    });
+//    $('#answer2').bind('keyup keydown keypress', function() {
+//        $('#choice2').html( $('#answer2').val() );
+//    });
+//    $('#answer3').bind('keyup keydown keypress', function() {
+//        $('#choice3').html( $('#answer3').val() );
+//    });
+//    $('#answer4').bind('keyup keydown keypress', function() {
+//        $('#choice4').html( $('#answer4').val() );
+//    });
+//    // populate the solution
+//    $checkedRadio.click( function() {
+//        var correctSolution = $checkedRadio.filter(":checked").next();
+//        $('#solution').html( correctSolution.val() );
+//
+//        correctSolution.bind('keyup keydown keypress', function() {
+//            $('#solution').html( correctSolution.val() );
+//        });
+//    });
+//});

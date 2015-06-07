@@ -158,7 +158,7 @@ function getSet()
         http.open('GET', '/api/getcardsindeck?id=' + deckid, false);
     http.send();
 	var jsonObjects = http.responseText;
-	console.log(jsonObjects);
+	// console.log(jsonObjects);
 	return jsonObjects;
 }
 
@@ -172,9 +172,11 @@ function flipCard() {
 		// remove the active class and give it to the back card
 		$('.front').removeClass('active');
 		$('.back').addClass('active');
+        $("#solution").css("visibility","visible");
 	}
 	else { // if the back is being shown
 		// rotate the card to show front
+        $("#solution").css("visibility","hidden");
 		$('.flipper').css( {transform: "rotateY(0deg)"});
 		$('.back').removeClass('active');
 		$('.front').addClass('active');

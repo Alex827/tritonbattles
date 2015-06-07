@@ -14,6 +14,14 @@
 }
 */
 
+#solution {
+    visibility: hidden;
+}
+
+.createDeckBtn {
+    margin-top: 4%;
+}
+
 .cardContainer {
     position:absolute;
     top:150px;
@@ -99,32 +107,7 @@
 	left:330px;
 	top:540px;
 }
-/*
-.allCards{
-	background:#F5F24E;
-	position:absolute;
-	top:120px;
-	left:50px;
-	margin:50px;
-	padding:10px;
-	font:16px/26px Georgia, Garamond, Serif;
-}
-*/
 
-.question-area, .tag-area, .answer-area {
-    background-color: #0099FF;
-    padding-left:10px;
-    padding-bottom: 10px;
-    border-top: 7px solid black;
-}
-
-.question-area, .tag-area, .answer-area {
-    border-left: 7px solid black;
-    border-right: 7px solid black;
-}
-.answer-area {
-    border-bottom: 7px solid black;
-}
 .allCards{
 	background:#F5F24E;
 	position:absolute;
@@ -133,7 +116,24 @@
 	margin:50px;
 	padding:10px;
 	border:1px solid #ccc;
-	font:16px/26px ;
+/*    border:0px solid #ccc;*/
+	font:16px/26px;
+    overflow:auto;
+    height:360px;
+    width:520px;
+}
+
+.question-area, .tag-area, .answer-area {
+    background-color: #0099FF;
+    padding-left:10px;
+    padding-bottom: 10px;
+    border-top: 5px solid black;
+    border-left: 5px solid black;
+    border-right: 5px solid black;
+}
+
+.answer-area {
+    border-bottom: 5px solid black;
 }
 
 /*////////////////////////////////////////*/
@@ -237,7 +237,7 @@
 .flipper {
     transition: 0.3s;
     transform-style: preserve-3d;
-    position: absolute;
+    position: relative;
 }
 
 /* hide back of card during flip */

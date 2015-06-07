@@ -50,7 +50,13 @@ function end() {
     var deckid = GetURLParameter("deck");
     
     if( tags == undefined ) {
-        tags = obj.tags;
+        var jsonObjects;
+        getById(deckid, function(e) {
+            jsonObjects = JSON.parse(e.substr(8));
+        }, false);
+        tags = jsonObjects.tags;
+//        tags = obj.tags;
+//        console.log(tags);
     }
 
     // reset choice backgrounds
@@ -72,7 +78,7 @@ function end() {
 
     //stop timer
     stopTimer();
-    console.log("called stop timer");
+//    console.log("called stop timer");
     endTime = document.getElementById("theTime").children[0].innerHTML;
     endTime = parseTime(endTime);
     score = endTime/maxIndex;
@@ -153,14 +159,14 @@ function getSet()
 	var http = new XMLHttpRequest();
     var tags = GetURLParameter('tags');
     var deckid = GetURLParameter('deck');
-    console.log(deckid);
+//    console.log(deckid);
 //    console.log(tags);
     if( tags != undefined ) {
         http.open('GET', '/api/searchcards?tags='+tags, false);
         http.send();
         var jsonObjects = http.responseText;
-    	console.log(jsonObjects);
-        console.log(typeof jsonObjects);
+//    	console.log(jsonObjects);
+//        console.log(typeof jsonObjects);
 //        jsonObjects = JSON.parse(jsonObjects);
         return jsonObjects;
     }
@@ -207,7 +213,7 @@ function choiceClick(choiceNum){
             choiceNum.style.background = '#E3170D'
             numWrong = numWrong + 1;
             addMillis(5000);
-            console.log("time added");
+//            console.log("time added");
         }
 
         // increases the card index
@@ -238,13 +244,25 @@ function goStudy() {
 
 // goes to the leaderboard for this set
 function goLeaderB() {
+    var http = new XMLHttpRequest();
     var tags = GetURLParameter('tags');
     var deckid = GetURLParameter('deck');
+    
     if( tags != undefined ) {
         window.location = "../Leaderboard.html?tags=" + tags;
     }
     else {
-        window.location = "../Leaderboard.html?tags=" + deckid;
+//        var jsonObjects = JSON.parse(http.responseText);
+//        console.log(jsonObjects);
+//        http.open('GET', '/api/searchdecks?id='+deckid, false);
+//        http.send();
+//        console.log(tags);
+        var jsonObjects;
+        getById(deckid, function(e) {
+            jsonObjects = JSON.parse(e.substr(8));
+        }, false);
+        tags = jsonObjects.tags;
+        window.location = "../Leaderboard.html?tags=" + tags;
     }
 }
 

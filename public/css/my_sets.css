@@ -35,6 +35,10 @@
 #section p {
 	font-size:30px;
 }
+.buttons {
+	left:50%;
+	margin-left: 55px;
+}
 
 @media screen and (max-width: 900px) {
 
@@ -57,7 +61,6 @@
 	.set {
 		top:550px;
 		left:50%;
-		margin-left:-120px;
 	}
 	
 }

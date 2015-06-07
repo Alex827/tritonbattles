@@ -17,24 +17,7 @@
 	</head>
 
 	<body>
-		<!--navbar-->
-<!--
-		<div class="topBar">
-			<ul class="pull-left">
-                 <form action="Search_Results_Signed.html" method="GET">
-                    <a href="Homepage.html"> <img src = "images/FULL_LOGO.png" height = "30">  </a> 
-               
-                    <input type="text" class="rounded" placeholder =  " &nbsp;Search for Flashcard Topics " name="tags">
-                    <a href="#"><img class="searchIcon" src = "images/SearchIcon.png" height = "20">
-                    </a>
-                </form>
-            </ul>
-            <ul class="pull-right">
-                <a href = "My_Sets.html"> <button type="button" class="btn btn-primary btn-sm leftButtonPos">Profile</button></a> 
-                <a href="Homepage.html">  <button type="button" class="btn btn-primary btn-sm rightButtonPos">Log Out</button></a> 
-            </ul>
-		</div> 	
--->
+
 <!-- START Login/Register pages -->
 <div class="cover"></div>
 <div class="loginpopup">
@@ -80,10 +63,10 @@
 <!-- START Login/Logged out pages -->
         <div class="topBar">
             <ul class="pull-left">
-                <form action="Search_Results.html" method="GET">
+                <form action="Search_Results.html" method="GET" id="form1">
                   <a href="Homepage.html"> <img src = "images/FULL_LOGO.png" height = "30">  </a> 
                   <input type="text" class="rounded" placeholder =  " &nbsp;Search for Flashcard Topics " name="tags">
-                  <a href="#"><img class="searchIcon" src = "images/SearchIcon.png" height = "20">
+                  <button type="submit" form="form1" formaction="Search_Results.html" formmethod="GET"><img class="searchIcon" src = "images/SearchIcon.png" height = "20"></button>
                   </a>
                 </form>
             </ul>
@@ -103,7 +86,7 @@
 		<div class="col-md-6">
 			<div id="yourCards"><h1>Card Preview</h1></div>
 		<!-- All Cards -->
-				<div class="allCards" style="height:360px;width:520px;border:0px solid #ccc;font:16px/26px; overflow:auto;">
+				<div class="allCards">
 					<div class="card">
 		                <div class="flashcard">
 		                    <div class="flipper">
@@ -128,8 +111,11 @@
 		  	         </div>
 		  	         <br>
 		            
+                    <button type="button" class="btn btn-default" id="lastButton" onclick="lastCardCreate()">Previous</button>
+ 				 	<button type="button" class="btn btn-default" id="nextButton" onclick="nextCardCreate()">Next</button>
 		  			<img src="images/flip.png" style="width:42px;height:42px;border:0" onmouseover ="this.src='images/fliphover.png'" onmouseout ="this.src='images/flip.png'" onclick=flipCard() />
 		             Flip Card
+                    <h5 id="cardStatus">Your current card: </h5>
 
 				</div>
 		</div>
@@ -174,14 +160,20 @@
 						placeholder="Type your fourth answer">
 						<br />
                         <br />
-                        <button type="button" class="btn btn-primary btn-sm addCard" onclick="addCard()">Add Card</button>
-                        <br />
-                        <h5 id="statusMessage">Please click "Add Card" button to submit.</h5>
-                        <input type="text" id="deckTitle" class="roundedHomepage" placeholder="Type in your deck title">
-                        <br />
-                        <input type="text" id="deckTags" class="roundedHomepage" placeholder="Type in your deck tags">
-						<br />                        
-                        <button type="button" class="btn btn-primary btn-sm createDeckBtn" onclick="addDeck()">Create a Deck</button>   
+                        <div class="addButtons">
+                            <button type="button" class="btn btn-primary btn-sm addCard" onclick="addCard()">Add Card</button>
+                            <br />
+                            <h5 id="statusMessage">Please click "Add Card" button to create a card.</h5>
+                            <h3 id="addDeckArea">Create a Deck From These Cards?</h3>
+                            <input type="text" id="deckTitle" class="roundedHomepage" placeholder="Type in your deck title">
+                            <br />
+                            <input type="text" id="deckTags" class="roundedHomepage" placeholder="Type in your deck tags">
+                            <br />                        
+                            <button type="button" class="btn btn-primary btn-sm createDeckBtn" onclick="addDeck()">Create a Deck</button>
+                            <br />
+                            <h4>Do you want to clear fields after making a new card?</h4>
+                            <input type="checkbox" id="clearCheckBox">
+                        </div>
                         </center>              
 					</div>
                     

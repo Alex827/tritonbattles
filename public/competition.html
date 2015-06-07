@@ -65,10 +65,10 @@
 <!-- START Login/Logged out pages -->
         <div class="topBar">
             <ul class="pull-left">
-                <form action="Search_Results.html" method="GET">
+                <form action="Search_Results.html" method="GET" id="form1">
                   <a href="Homepage.html"> <img src = "images/FULL_LOGO.png" height = "30">  </a> 
                   <input type="text" class="rounded" placeholder =  " &nbsp;Search for Flashcard Topics " name="tags">
-                  <a href="#"><img class="searchIcon" src = "images/SearchIcon.png" height = "20">
+                  <button type="submit" form="form1" formaction="Search_Results.html" formmethod="GET"><img class="searchIcon" src = "images/SearchIcon.png" height = "20"></button>
                   </a>
                 </form>
             </ul>
@@ -86,7 +86,7 @@
 
 
         <div id="nav-side" class="nav-side">
-            <a href = "Study_Set.html">  <button type="button" class="btn btn-primary btn-lg backButton">Back to Set</button></a>
+            <a href = "Study_Set.html">  <button type="button" class="btn btn-primary btn-lg backButton" onclick="window.history.back()">Back to Set</button></a>
         </div>
 
 

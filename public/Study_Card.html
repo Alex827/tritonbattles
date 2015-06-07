@@ -17,10 +17,13 @@
         <script type="text/javascript" src="../routes/search.js"></script>
       <script>
         $(document).ready( function() {
-//                var $studyLink = $("#studyBtn").attr("href");
+            var tags = GetURLParameter("tags");
+            var deckid = GetURLParameter("deck");
             var $challengeLink = $("#challengeBtn").attr("href");
-//                $("#studyBtn").attr("href", $studyLink + QueryString.tags);
-            $("#challengeBtn").attr("href", $challengeLink + GetURLParameter("tags"));
+            if((tags && tags.length > 0) || !deckid)
+                $("#challengeBtn").attr("href", $challengeLink+"tags="+ tags);
+            else
+                $("#challengeBtn").attr("href", $challengeLink+"deck="+ deckid);
         });
     </script>
 	</head>
@@ -71,10 +74,10 @@
 <!-- START Login/Logged out pages -->
         <div class="topBar">
             <ul class="pull-left">
-                <form action="Search_Results.html" method="GET">
+                <form action="Search_Results.html" method="GET" id="form1">
                   <a href="Homepage.html"> <img src = "images/FULL_LOGO.png" height = "30">  </a> 
                   <input type="text" class="rounded" placeholder =  " &nbsp;Search for Flashcard Topics " name="tags">
-                  <a href="#"><img class="searchIcon" src = "images/SearchIcon.png" height = "20">
+                  <button type="submit" form="form1" formaction="Search_Results.html" formmethod="GET"><img class="searchIcon" src = "images/SearchIcon.png" height = "20"></button>
                   </a>
                 </form>
             </ul>
@@ -128,7 +131,7 @@
  				 	<button type="button" class="btn btn-default" id="nextButton" onclick="nextCard()">Next</button>
                     <img src="images/flip.png" style="width:42px;height:42px;border:0" onmouseover ="this.src='images/fliphover.png'" onmouseout ="this.src='images/flip.png'" onclick=flipCard() />
                     <br /> <br />
-                    <a id="challengeBtn" href="competition.html?tags="><button type="button" class="btn btn-danger">Challenge</button></a>
+                    <a id="challengeBtn" href="competition.html?"><button type="button" class="btn btn-danger">Challenge</button></a>
  				 </div>
 			</div>
 		</div>	
