@@ -3,7 +3,11 @@
 	left: 50px;
 	top: 100px;
 }
-
+    .backButton {
+        position:absolute;
+        left:50%;
+        margin-left:68px;
+    }
 .Back_to_Search a:link, .Back_to_Search a:visited{
 	text-decoration: none;
 	cursor: auto;
@@ -17,7 +21,7 @@
     position: absolute;
     top: 50px;
     height: 100%;
-    width: 250px;
+    width: 300px;
     overflow:scroll;
 }
 #nav-side a{
@@ -141,7 +145,7 @@
         position:absolute;
         top:60px;
         left:50%;
-        margin-left: 125px
+        margin-left: 125px;
     }
 }
 

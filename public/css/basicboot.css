@@ -5,6 +5,11 @@ body {
 ::-webkit-scrollbar { 
     display: none; 
 }
+.nav-side{
+	width:300px;
+	padding-left:10px;
+	padding-right:10px;
+}
 /*Search bar appearance. Can modify for square vs round search bar*/
 .rounded { 
 	border-radius:3px; 
