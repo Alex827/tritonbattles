@@ -15,11 +15,9 @@
 */
 
 .cardContainer {
-    width:500px;
-    height:50px;
-    position:fixed;
-    left: 700px;
-    top: 150px;
+    position:absolute;
+    top:150px;
+    left:700px;
 }
 
 .btn {
@@ -40,8 +38,9 @@
 	left:600px;
 }
 #yourCards{
-    margin-left: auto;
-    margin-right: auto;
+    position:absolute;
+    top:100px;
+    left:50px;
 }
 #newCard{
 
@@ -112,25 +111,41 @@
 }
 */
 
+.question-area, .tag-area, .answer-area {
+    background-color: #0099FF;
+    padding-left:10px;
+    padding-bottom: 10px;
+    border-top: 7px solid black;
+}
+
+.question-area, .tag-area, .answer-area {
+    border-left: 7px solid black;
+    border-right: 7px solid black;
+}
+.answer-area {
+    border-bottom: 7px solid black;
+}
 .allCards{
 	background:#F5F24E;
-	position:fixed;
-	top:120px;
-	left:50px;
+	position:absolute;
+	top:150px;
+	left:10px;
 	margin:50px;
 	padding:10px;
 	border:1px solid #ccc;
 	font:16px/26px ;
 }
+
 /*////////////////////////////////////////*/
 .question{
     /*margin-top: 1%;
     margin-bottom: 1%;*/
+    font-size: 16;
 }
 .answers {
     width:30px;
     height:60px;
-    position: relative;
+    position: absolute;
 /*    color: white;*/
 }
 #choice1 {
@@ -222,7 +237,7 @@
 .flipper {
     transition: 0.3s;
     transform-style: preserve-3d;
-    position: relative;
+    position: absolute;
 }
 
 /* hide back of card during flip */
@@ -295,6 +310,15 @@
     #newCard {
         top: 600px;
         left:210px;
+    }
+    .cardContainer {
+        left: 50%;
+        margin-left:-250px;
+        top: 600px;
+    }
+    .allCards {
+        left:50%;
+        margin-left:-265px;
     }
     
     

@@ -125,7 +125,7 @@ passport.use(new LocalStrategy(
 passport.use(new GoogleStrategy({
     clientID: GOOGLE_CLIENT_ID,
     clientSecret: GOOGLE_CLIENT_SECRET,
-    callbackURL: "http://tritonbattles.herokuapp.com/auth/google/callback"
+    callbackURL: "https://tritonbattles.herokuapp.com/auth/google/callback"
 }, function(acccessToken, refreshToken, profile, done){
     //Find a user with the same primary email on the google account
     models.User.findOne({email: profile.emails[0].value}, function(err, user){
@@ -155,7 +155,7 @@ passport.use(new GoogleStrategy({
 passport.use(new FacebookStrategy({
     clientID: FACEBOOK_APP_ID,
     clientSecret: FACEBOOK_APP_SECRET,
-    callbackURL: "http://tritonbattles.herokuapp.com/auth/facebook/callback"
+    callbackURL: "https://tritonbattles.herokuapp.com/auth/facebook/callback"
   },
   function(accessToken, refreshToken, profile, done) {
     //Look for user with the email address from facebook

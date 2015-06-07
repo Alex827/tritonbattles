@@ -80,10 +80,12 @@
 <!-- START Login/Logged out pages -->
         <div class="topBar">
             <ul class="pull-left">
-                <a href="Homepage.html"> <img src = "images/FULL_LOGO.png" height = "30">  </a> 
-                <input type="text" class="rounded" placeholder =  " &nbsp;Search for Flashcard Topics " name="tags">
-                <a href="#"><img class="searchIcon" src = "images/SearchIcon.png" height = "20">
-                </a>
+                <form action="Search_Results.html" method="GET">
+                  <a href="Homepage.html"> <img src = "images/FULL_LOGO.png" height = "30">  </a> 
+                  <input type="text" class="rounded" placeholder =  " &nbsp;Search for Flashcard Topics " name="tags">
+                  <a href="#"><img class="searchIcon" src = "images/SearchIcon.png" height = "20">
+                  </a>
+                </form>
             </ul>
             <ul class="pull-right logged-in-box">
                 <a href = "profile.html"> <button type="button" class="btn btn-primary btn-sm leftButtonPos">Profile</button></a> 
@@ -107,7 +109,7 @@
 		                    <div class="flipper">
 		                        <div class="front active" display="block">
 		                            <br />
-		                            <div class ="question" id="question">Question</div>
+		                            <div class ="question" id="question"><b>Question</b></div>
 		                            <br />
 		                            <div class="answers" id="answers" style="text-align:center;">
 		                                <button class="choice roundedHomepage" type="submit" id="choice1" >Choice 1</button><br />
@@ -131,39 +133,43 @@
 
 				</div>
 		</div>
-		<div class="col-md-6">
-			<div id="newCard"><h1>Create a New Card</h1></div>
+
+			<div id="newCard"></div>
 				<!-- Creating a Card-->
 				<form name="newCardForm">
 					<div class="cardContainer">
 						<div class="card">
 							<div class="question-area">
 								<h1>Question:</h1>
+								<center>
 								<input type="text" id="question-field" name="question" class="roundedHomepage" placeholder="Type your question here">
-								<br>
+							</center>
 							</div>
 		                    
 		                    <div class="tag-area">
-		                        <h1>Tags (with a comma in between)</h1>
+		                        <h1>Tags (Separate by ',')</h1>
+		                        <center>
 		                        <input type="text" id="tag-field" name="input-tags" class="roundedHomepage" placeholder="Type tags here">
 <!--                        <button id="add-tag">Add tags</button>-->
+								</center>
                     </div>
 
 					<div class="answer-area">
 						<h1>Answers (fill in the solution):</h1> 
-                        <input type="radio" class="correctSolution roundedHomepage" name="pickSolution">
+						<center>
+                        <input type="radio" class="correctSolution " name="pickSolution">
 						<input type="text" class="answer-field roundedHomepage" id="answer1" name="answer" 
 						placeholder="Type your first answer">
 						<br />
-                        <input type="radio" class="correctSolution roundedHomepage" name="pickSolution">
+                        <input type="radio" class="correctSolution " name="pickSolution">
 						<input type="text" class="answer-field roundedHomepage" id="answer2" name="answer"
 						placeholder="Type your second answer">
 						<br />
-                        <input type="radio" class="correctSolution roundedHomepage" name="pickSolution">
+                        <input type="radio" class="correctSolution " name="pickSolution">
 						<input type="text" class="answer-field roundedHomepage" id="answer3" name="answer"
 						placeholder="Type your third answer">
 						<br />
-                        <input type="radio" class="correctSolution roundedHomepage" name="pickSolution">
+                        <input type="radio" class="correctSolution " name="pickSolution">
 						<input type="text" class="answer-field roundedHomepage" id="answer4" name="answer"
 						placeholder="Type your fourth answer">
 						<br />
@@ -171,17 +177,18 @@
                         <button type="button" class="btn btn-primary btn-sm addCard" onclick="addCard()">Add Card</button>
                         <br />
                         <h5 id="statusMessage">Please click "Add Card" button to submit.</h5>
-                        <input type="text" id="deckTitle" placeholder="Type in your deck title">
+                        <input type="text" id="deckTitle" class="roundedHomepage" placeholder="Type in your deck title">
                         <br />
-                        <input type="text" id="deckTags" placeholder="Type in your deck tags">
+                        <input type="text" id="deckTags" class="roundedHomepage" placeholder="Type in your deck tags">
 						<br />                        
-                        <button type="button" class="btn btn-primary btn-sm createDeckBtn" onclick="addDeck()">Create a Deck</button>                 
+                        <button type="button" class="btn btn-primary btn-sm createDeckBtn" onclick="addDeck()">Create a Deck</button>   
+                        </center>              
 					</div>
                     
 				</div>
 			</div>
 		</form>
-	</div>
+
 		</div>
 	</body>
 </html>

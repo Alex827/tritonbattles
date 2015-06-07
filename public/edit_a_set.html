@@ -64,10 +64,12 @@
 	<!-- START Login/Logged out pages -->
 	<div class="topBar">
 		<ul class="pull-left">
-			<a href="Homepage.html"> <img src = "images/FULL_LOGO.png" height = "30">  </a> 
-			<input type="text" class="rounded" placeholder =  " &nbsp;Search for Flashcard Topics " name="tags">
-			<a href="#"><img class="searchIcon" src = "images/SearchIcon.png" height = "20">
-			</a>
+      <form action="Search_Results.html" method="GET">
+        <a href="Homepage.html"> <img src = "images/FULL_LOGO.png" height = "30">  </a> 
+        <input type="text" class="rounded" placeholder =  " &nbsp;Search for Flashcard Topics " name="tags">
+        <a href="#"><img class="searchIcon" src = "images/SearchIcon.png" height = "20">
+        </a>
+      </form>
 		</ul>
 		<ul class="pull-right logged-in-box">
 			<a href = "profile.html"> <button type="button" class="btn btn-primary btn-sm leftButtonPos">Profile</button></a> 
@@ -166,7 +168,7 @@
 
 
 
-	<div class="cardsList" id="yourCards"><h1>Your Cards (Click to edit)</h1>
+	<div class="cardsList" id="yourCards2"><h1>Your Cards (Click to edit)</h1>
 		<button type="button" id = "NewCard" class="btn btn-primary btn-sm container" onclick="newCard()" onclick = "reset">Click to Add a New Card</button>
 		<div id="card_set">
 		</div>
