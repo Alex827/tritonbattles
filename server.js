@@ -59,7 +59,7 @@ app.set('port', process.env.PORT || port);
 //app.set('view engine', 'html');
 
 //Serve static content from the public directory
-app.use(express.static(path.join(__dirname, 'public'), {index: 'List_Of_Links.html'}));
+app.use(express.static(path.join(__dirname, 'public'), {index: 'Homepage.html'}));
 
 //Link relative path names to their static server directories
 app.use("/routes", express.static(path.join(__dirname, 'routes')));
