@@ -576,6 +576,17 @@ app.get('/api/searchcards', function(req, resp){
         searchParams.answers = req.query.answers.replace(/\s*[,\s]\s*/g, ',').split(',');
     if(req.query.tags !== undefined && req.query.tags.length > 0)
         searchParams.tags = req.query.tags.replace(/\s*[,\s]\s*/g, ',').split(',');
+		var emptyFlag = 0;
+		for(var prop in searchParams){
+			if(searchParams.hasOwnProperty(prop)){
+				emptyFlag = 1;
+				break;
+			}
+		}
+		if(emptyFlag === 0){
+			resp.send([]);
+			return;
+		}
     //Search for any and all cards that match the criteria
     models.FlashCard.find(searchParams, function(err, flashcards){
         if(err){
