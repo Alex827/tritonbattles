@@ -148,10 +148,11 @@ function addCard()
     //put the card ID into an array to be used later for making a deck
     cardIDArray.push(cardIDToSave);
     //console.log(cardIDArray);
+    newCard();
 }
 
-function addDeck(cardsToAdd, tagsToAdd) {
-    createDeck(cardIDArray, tagsToAdd, "", function(e){}, false);
+function addDeck() {
+    createDeck(cardIDArray, document.getElementById("deckTags").value, document.getElementById("deckTitle").value, function(e){}, false);
     var $statusM = $("#statusMessage");
 
     $statusM.html("<strong>Deck created!</strong>");
@@ -180,6 +181,7 @@ function errStatusMessage(string1, var1) {
         var1.css("background-color","#FFCCCC");
         setTimeout( function() {
             var1.css("background-color","#F0F0F0");
+
         }, timeOffset);
     }
     setTimeout(normStatusMessage, timeOffset);
@@ -192,6 +194,20 @@ function successStatusMessage() {
     $statusM.html("<strong>Card created!</strong>");
     $statusM.css("color", "green");
     setTimeout(normStatusMessage, timeOffset);
+}
+
+//Clears fields after adding cards
+function newCard(){
+    console.log("newcard button")
+    document.getElementById("question-field").value=null;
+    document.getElementById("question").innerHTML = "Question";
+    document.getElementById("tag-field").value=null;
+    for(r=0; r < 4; r++){
+        var h = r+1;
+        document.getElementById("answer"+h).value=null;
+        document.getElementById("choice"+h).innerHTML = "Choice " + h;
+        document.getElementsByClassName("correctSolution roundedHomepage").checked = false;
+    }
 }
 
 $('document').ready(function() {

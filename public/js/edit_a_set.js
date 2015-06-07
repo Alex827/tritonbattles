@@ -1,11 +1,22 @@
 var obj;
-var flag;
-
+var flag = null;
+var deckid;
+function GetURLParameter(sParam) {
+    var sPageURL = window.location.search.substring(1);
+    var sURLVariables = sPageURL.split('&');
+    for (var i = 0; i < sURLVariables.length; i++) {
+        var sParameterName = sURLVariables[i].split('=');
+        if (sParameterName[0] == sParam) {
+            return sParameterName[1];
+        }
+    }
+}
 function loadCards(){
 	document.getElementById("card_set").innerHTML = "";
 
 	var http = new XMLHttpRequest();
-	http.open('GET', '/api/searchcards', false);
+	deckid = GetURLParameter('deck');
+	http.open('GET', '/api/getcardsindeck?id=' + deckid, false);
 	http.send();
 	var cards = http.responseText;
 	obj = JSON.parse(cards);
@@ -131,6 +142,7 @@ function addEditCard(){
     }
 
 	if(flag == null){
+		console.log("adding new card")
 		// encode everything to pass into the database
     	var encodedQ = encodeURIComponent(questionFromField);
     	var encodedS = encodeURIComponent(solution);
@@ -142,14 +154,14 @@ function addEditCard(){
 	        var cardID = result.slice(8);
 	        // if the card is in the database, then do not make card
 	        if( cardID !== "[]" ) {
-	            //console.log("CANNOT MAKE: card already created");
+	            console.log("CANNOT MAKE: card already created");
 	            errStatusMessage("Card was already made. Please try again.");
 	        }
 	        // else make the card and get its ID
 	        else {
 	            // making the card
 	            createFlashCard(encodedQ, encodedS, type, encodedA, encodedT, function(result2) {
-	                //console.log("card created: "+result2);
+	                console.log("card created: "+result2);
 	                // format the result
 	                cardID = result2.slice(8);
 	                // parse as JSON object
@@ -162,10 +174,11 @@ function addEditCard(){
 	            }, false);
 	        }
 	    }, false);
-
+console.log("adding card to deck");
 	    //put the card ID into an array to be used later for making a deck
 	    cardIDArray.push(cardIDToSave);
-	    //console.log(cardIDArray);
+	    console.log(cardIDArray);
+	    addCardsToDeck(deckid, "", cardIDArray, function(e){}, false);
 
 	}
 	else{
@@ -186,7 +199,7 @@ function addEditCard(){
     	var encodedS = encodeURIComponent(solution);
     	var encodedA = encodeURIComponent(answerArray);
     	var encodedT = encodeURIComponent(tagsFromField);
-		editCard(flag._id, encodedQ, encodedS, "", encodedA, encodedT, function(e){console.log(e)})
+		editCard(flag._id, encodedQ, encodedS, "", encodedA, encodedT, function(e){})
 	}
 	loadCards();
 	newCard();

@@ -150,9 +150,13 @@ function getSet()
 {
 	var http = new XMLHttpRequest();
     var tags = GetURLParameter('tags');
+    var deckid = GetURLParameter('deck');
     //console.log(tags);
-    http.open('GET', '/api/searchcards?tags='+tags, false);
-	http.send();
+    if((tags && tags.length > 0) || !deckid)
+        http.open('GET', '/api/searchcards?tags='+tags, false);
+	else
+        http.open('GET', '/api/getcardsindeck?id=' + deckid, false);
+    http.send();
 	var jsonObjects = http.responseText;
 	console.log(jsonObjects);
 	return jsonObjects;

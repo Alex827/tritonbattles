@@ -1,12 +1,39 @@
 .Title {
-	font-family:"Arial", Courier, monospace;	
 	text-align: center;
 	vertical-align: middle;
 	color:white;
 	height:180px;
 	font-size: 50px;
-	padding-top:10px;
+	padding-top:25px;
 
+}
+.About {
+	width:1000px;
+	top: 10px;
+	left:50%;
+	height:200px;
+	margin-left: -500px;
+	position: absolute;
+	font-size: 20px;
+	opacity:0;
+	padding-left:100px;
+	padding-right: 100px;
+	padding-top: 40px;
+	font-family: "Segoe UI", sans-serif;
+}
+.About:hover {
+	opacity: 1;
+	background-color: rgba(255,255,80,0.9);
+	border: 17px solid rgba(0,0,255,0.8);
+	font-color:black;
+}
+.Title:hover {
+	filter: blur(5px);
+// Browser Specific
+-webkit-filter: blur(5px);
+-moz-filter: blur(5px);
+-o-filter: blur(5px);
+-ms-filter: blur(5px);
 }
 .centerPage {
 	background-color: #0099FF;
@@ -39,5 +66,22 @@
 		height:100px;
 		width:auto;
 	}
+	.About {
+	width:500px;
+	top: 10px;
+	left:50%;
+	height:100px;
+	margin-left: -250px;
+	position: absolute;
+	font-size: 10px;
+	opacity:0;
+	padding-left:50px;
+	padding-right: 50px;
+	padding-top: 20px;
+	font-family: "Segoe UI", sans-serif;
+}
+.About:hover {
+	border: 10px solid rgba(0,0,255,0.8);
+}
 	
 }

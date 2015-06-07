@@ -49,35 +49,36 @@
     		<img src="http://www.genengnews.com/app_themes/genconnect/images/default_profile.jpg" alt="set" height ="200" width="200"><br>
 
     		<a href="Create_New_Cards.html"><button type="button" class="btn btn-primary btn-sm" style="width: 100%">Create Cards/Deck</button></a> <br>
-    		<a href="edit_a_set.html"><button type="button" class="btn btn-primary btn-sm" style="width: 100%">Edit Cards/Deck</button></a> <br>
     	</div>
-    	<div class="set">
+    	<div class="set" id="card_set">
     		<script>
-                var user;
-                getUserInfo(function(response){
-                    console.log(response);
-                    user = JSON.parse(response);
-                    console.log(user.username);
+                loadDecks();
+                function loadDecks(){
+                    var user;
+                    var decks;
+                    var deck;
+                    getUserInfo(function(user){
+                        user = JSON.parse(user);
+                        decks = user.myDecks;
+                        console.log(user);
 
-                    var testDiv = "";
-                    for (var i = 0; i < user.decks.length; i++)
-                    {
-                        var favoriteDiv = 
-                        '<div class = "deckLink"> <a href = "https://tritonbattles.herokuapp.com/Search_Results_Signed.html?tags=' + user.decks[i] + '"> <div class = "image"> <img src="Images/CardSet.png" width="220" height="190"></div><div class = "caption"><h2>' + user.decks[i] + ' </h2></div></a></div><br>';
-
-                        var row = Math.floor((i%3) + 1);
-                        $("#Favorites" + row).append(favoriteDiv);
+                    },false);
+                    var wrapper = $('#card_set'), container;
+                    for(i=0; i < decks.length; i++){
+                        getById(decks[i], function(e){
+                            deck = JSON.parse(e.substr(8));
+                            container = $('<div class = "image1"><center><h1>'+deck.title+'</h1><img src="images/CardSet.png" width="304" height="236"></center><div class="buttonArea"><div class = "study_button"><a id="studyBtn" href="Study_Card.html?deck='+decks[i]+'"><button type="button" class="btn btn-primary">Study</button></a></div><div class = "challenge_button"><a id="challengeBtn" href="competition.html?deck='+decks[i]+'"><button type="button" class="btn btn-danger">Challenge</button></a></div><div class = "edit_button"><a id="editBtn" href="edit_a_set.html?deck='+decks[i]+'"><button type="button" class="btn btn-danger">Edit</button></a></div></div></div>');
+                            wrapper.append(container);
+                            console.log(deck);
+                        }, false);
                     }
-                    
-                })
+                }
             </script>
 
-            <div class="row">
-               <div id="Favorites1" class="col-md-4"></div>
-               <div id="Favorites2" class="col-md-4"></div>
-               <div id="Favorites3" class="col-md-4"></div>
-           </div>
-       </div>
-       <!--/div-->
-   </body>
-   </html>
+            
+     </div>
+     <!--/div-->
+ </body>
+ </html>
+
+ 

@@ -34,3 +34,18 @@
 	top:100px;
 	left:50px;
 }
+
+.question-area, .tag-area, .answer-area {
+	background-color: #0099FF;
+	padding-left:10px;
+	padding-bottom: 10px;
+	border-top: 7px solid black;
+}
+
+.question-area, .tag-area, .answer-area {
+	border-left: 7px solid black;
+	border-right: 7px solid black;
+}
+.answer-area {
+	border-bottom: 7px solid black;
+}

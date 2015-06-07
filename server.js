@@ -125,7 +125,7 @@ passport.use(new LocalStrategy(
 passport.use(new GoogleStrategy({
     clientID: GOOGLE_CLIENT_ID,
     clientSecret: GOOGLE_CLIENT_SECRET,
-    callbackURL: "https://tritonbattles.herokuapp.com/auth/google/callback"
+    callbackURL: "http://localhost:9097/auth/google/callback"
 }, function(acccessToken, refreshToken, profile, done){
     //Find a user with the same primary email on the google account
     models.User.findOne({email: profile.emails[0].value}, function(err, user){
@@ -155,7 +155,7 @@ passport.use(new GoogleStrategy({
 passport.use(new FacebookStrategy({
     clientID: FACEBOOK_APP_ID,
     clientSecret: FACEBOOK_APP_SECRET,
-    callbackURL: "https://tritonbattles.herokuapp.com/auth/facebook/callback"
+    callbackURL: "http://localhost:9097/auth/facebook/callback"
   },
   function(accessToken, refreshToken, profile, done) {
     //Look for user with the email address from facebook
@@ -534,6 +534,7 @@ app.get('/api/getbyid', function(req, resp){
     models.FlashCard.findOne({_id : id}, function(err, flashcard){
         if(err){
             console.log(err);
+            resp.send("An error occurred.");
             return;
         }
         if(flashcard)
@@ -541,14 +542,15 @@ app.get('/api/getbyid', function(req, resp){
             resp.send(flashcard);
         else{
             //No flashcard, find a deck with that ID
-            models.Deck.findOne({'_id' : id}, function(err, deck){
+            models.Deck.findOne({_id : id}, function(err, deck){
                 if(err){
                     console.log(err);
+                    resp.send("An error occurred.");
                     return;
                 }
                 if(deck){
                     //We found it!
-                    resp.send(flashcard);
+                    resp.send(deck);
                     return;
                 }else{
                     //No deck or card with that ID exists in the DB
@@ -915,7 +917,7 @@ app.get('/api/getuserdecks', function(req, resp){
         resp.send("Must be logged in.");
         return;
     }else{
-        resp.send(user.decks);
+        resp.send(req.user.decks);
     }
 });
 
@@ -928,7 +930,7 @@ app.get('/api/getcardsindeck', function(req, resp){
         return;
     }
     //Get the deck with the right ID
-    models.Deck.findOne({'_id' : id}, function(err, deck){
+    models.Deck.findOne({_id : id}, function(err, deck){
         if(err){
             console.log(err);
             return;
@@ -937,30 +939,40 @@ app.get('/api/getcardsindeck', function(req, resp){
              resp.send("That Id does not correspond to a deck.");
          }else{
             //We found the deck
-            var ret = "";
+            var ret = [];
             var i;
+             var remaining = deck.cards.length;
+             if(remaining === 0){
+                resp.send([]);
+                 return;
+             }
             //Loop through the IDs in the deck and add each card to the response
              var flag = 0;
             for(i = 0; i < deck.cards.length; ++i){
-                models.FlashCard.findOne({'_id': deck.cards[i]}, function(err, flashcard){
+                models.FlashCard.findOne({_id: deck.cards[i]}, function(err, flashcard){
                     if(err){
                         console.log(err);
                         flag++;
+                        remaining = remaining - 1;
                         return;
                     }
                     if(flashcard){
-                        ret += deck.cards[i];
+                        ret.push(flashcard);
+                        remaining = remaining - 1;
+                        if(remaining === 0){
+                            if(flag > 0){
+                                resp.send("Failed to retrieve " + flag + " card(s) from the deck:" + ret);
+                            }else{
+                                resp.send(ret);
+                            }
+                        }
                     }else{
                         flag++;
+                        remaining = remaining - 1;
                         return;
                     }
                 });
             }
-             if(flag > 0){
-                resp.send("Failed to retrieve " + flag + " card(s) from the deck:" + ret);
-             }else{
-                 resp.send(ret);
-             }
          }
      });
 });
@@ -981,7 +993,7 @@ app.post('/api/newdeck', function(req,resp){
         nd.cards = req.body.cards.split(',');
     if(req.body.tags && req.body.tags !== 'undefined' && req.body.tags.length > 0)
         nd.tags = req.body.tags.split(',');
-    //nd.owner = req.user.username;
+    nd.owner = req.user.username;
     nd.save(function(err){
        if(err){
             console.log("Error creating new deck: " + err);
@@ -1011,20 +1023,21 @@ app.post('/api/updatedeck', function(req, resp){
     //Validate and get all parameters
     var searchParams = {}
     var cards;
-    if(req.body.title !== 'undefined' && req.body.title.length > 0)
+    if(req.body.title && req.body.title !== 'undefined' && req.body.title.length > 0)
         searchParams.title = req.body.title;
-    if(req.body.id !== 'undefined' && req.body.id.length > 0)
-        searchParam['_id'] = req.body.i1d;
-    if(req.body.cards !== 'undefined' && req.body.cards.length > 0)
+    if(req.body.id && req.body.id !== 'undefined' && req.body.id.length > 0)
+        searchParams['_id'] = req.body.id;
+    if(req.body.cards && req.body.cards !== 'undefined' && req.body.cards.length > 0)
         cards = req.body.cards.replace(/\s*[,\s]\s*/g, ',').split(',');
-    if(req.body.title.length + req.body.id.length < 1){
+    if((!req.body.title || req.body.title.length < 1) && (!req.body.id || req.body.id.length < 1)){
         resp.send("Please provide a title or id of the deck to update.");
         return;
     }
-    if(cards.length < 1){
+    if(!cards || cards.length < 1){
         resp.send("Please provide cards to add to the deck.");
         return;
     }
+    console.log(searchParams);
     //Look for the deck based on provided criteria
     models.Deck.findOne(searchParams, function(err, deck){
         if(err){
@@ -1038,7 +1051,7 @@ app.post('/api/updatedeck', function(req, resp){
                 return;
             }else{
                 //Check if the logged in user owns the deck
-                if(deck.owner === req.user.username){
+                if(!deck.owner || deck.owner === req.user.username){
                     //update the deck
                     deck.cards = deck.cards.concat(cards);
                     deck.save(function(err){

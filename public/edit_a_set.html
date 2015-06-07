@@ -2,8 +2,10 @@
 <head>
 	<script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
 	<script type="text/javascript" src="/js/createSet.js"></script>
-	<script type="text/javascript" src="/js/card_viewer.js"></script>
 	<script type="text/javascript" src="/routes/update.js"></script>
+	<script type="text/javascript" src="/js/edit_a_set.js"></script>
+	<script src="../views/login.js" type="text/javascript"></script>
+	<script type="text/javascript" src="../routes/search.js"></script>
 	<link rel="stylesheet" href="css/create_new_cards.css">
 	<link rel="stylesheet" href="css/basicboot.css">
 	<link rel="stylesheet" href="css/edit_a_set.css">
@@ -80,7 +82,7 @@
 	<!-- END Login/Logged out pages -->
 
 	<!-- Header -->
-	<div id="pageTitle"><h1>Create a New Card/Edit a Card</h1></div>
+	<div id="pageTitle"><h1>Create a New Card/ Edit a Card</h1></div>
 
 	<!-- Creating a Card -->
 	<form name="newCardForm">
@@ -88,30 +90,35 @@
 			<div class="card">
 				<div class="question-area">
 					<h1>Question:</h1>
+					<center>
 					<input type="text" id="question-field" class="roundedHomepage" name="question" placeholder="Type your question here">
-					<br>
+				</center>
+
 				</div>
 
 				<div class="tag-area">
-					<h1>Tags (with a comma in between)</h1>
+					<h1>Tags (Separate by ',')</h1>
+					<center>
 					<input type="text" id="tag-field" name="input-tags" class="roundedHomepage" placeholder="Type tags here">
+				</center>
 				</div>
 
 				<div class="answer-area">
-					<h1>Answers (fill in the solution):</h1>
-					<input id="butt0" type="radio" class="correctSolution roundedHomepage" name="pickSolution">
+					<h1>Answers (Fill in the solution):</h1>
+					<center>
+					<input id="butt0" type="radio" class="correctSolution " name="pickSolution">
 					<input type="text" class="answer-field roundedHomepage" id="answer1" name="answer" 
 					placeholder="Type your first answer">
 					<br />
-					<input id="butt1" type="radio" class="correctSolution roundedHomepage" name="pickSolution">
+					<input id="butt1" type="radio" class="correctSolution " name="pickSolution">
 					<input type="text" class="answer-field roundedHomepage" id="answer2" name="answer"
 					placeholder="Type your second answer">
 					<br />
-					<input id="butt2" type="radio" class="correctSolution roundedHomepage" name="pickSolution">
+					<input id="butt2" type="radio" class="correctSolution " name="pickSolution">
 					<input type="text" class="answer-field roundedHomepage" id="answer3" name="answer"
 					placeholder="Type your third answer">
 					<br />
-					<input id="butt3" type="radio" class="correctSolution roundedHomepage" name="pickSolution">
+					<input id="butt3" type="radio" class="correctSolution " name="pickSolution">
 					<input type="text" class="answer-field roundedHomepage" id="answer4" name="answer"
 					placeholder="Type your fourth answer">
 					<br />
@@ -119,13 +126,14 @@
 					<button type="button" class="btn btn-primary btn-sm" onclick="addEditCard()">Add/Edit Card</button>
 					<br />
 					<h5 id="statusMessage">Please click "Add/Edit Card" button to submit changes or add new card.</h5>
+				</center>
 				</div>
 
 			</div>
 		</div>
 	</form>
 
-	<div class="allCards" style="height:360px;width:520px;border:0px solid #ccc;font:16px/26px Segoe UI;overflow:auto;">
+	<div class="allCards" style="height:360px;width:520px;border:0px solid #ccc;font:16px/26px;overflow:auto;">
 		<div class="card">
 			<div class="flashcard">
 				<div class="flipper">
@@ -149,20 +157,19 @@
 			</div>
 		</div>
 		<br>
-
+		<center>
 		<img src="images/flip.png" style="width:42px;height:42px;border:0" onmouseover ="this.src='images/fliphover.png'" onmouseout ="this.src='images/flip.png'" onclick=flipCard() />
+		<br>
 		Flip Card
-
+	</center>
 	</div>
 
 
 
-	<div class="cardsList" id="yourCards"><h1>Your Cards(click to edit)</h1>
+	<div class="cardsList" id="yourCards"><h1>Your Cards (Click to edit)</h1>
 		<button type="button" id = "NewCard" class="btn btn-primary btn-sm container" onclick="newCard()" onclick = "reset">Click to Add a New Card</button>
 		<div id="card_set">
 		</div>
 	</div>
-	<script type="text/javascript" src="/js/edit_a_set.js"></script>
-
 </body>
 </html>

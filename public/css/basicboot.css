@@ -7,13 +7,13 @@ body {
 }
 /*Search bar appearance. Can modify for square vs round search bar*/
 .rounded { 
-	border-radius:0px; 
-	-moz-border-radius:0px; 
-	-webkit-border-radius:0px; 
+	border-radius:3px; 
+	-moz-border-radius:3px; 
+	-webkit-border-radius:3px; 
 	width:200px;
 	position:absolute;
-	top:16px;
-		border:0px solid darkblue;
+	top:17px;
+		border:0px solid #333;
 	background-color:white;
 		padding:4px 2px;
 
@@ -24,11 +24,11 @@ body {
 
 }
 .roundedHomepage { 
-	border-radius:0px; 
-	-moz-border-radius:0px; 
-	-webkit-border-radius:0px; 
+	border-radius:3px; 
+	-moz-border-radius:3px; 
+	-webkit-border-radius:3px; 
 	width:200px;
-	border:0px solid darkblue;
+	border:0px solid #333;
 	background-color:#F0F0F0 ;
 	padding:4px 2px;
 }
@@ -82,7 +82,7 @@ top:13px;
 
 body {
 	background: white;
-	font-family: "Segoe UI";
+	font-family: "Segoe UI", sans-serif;
 
 }
 

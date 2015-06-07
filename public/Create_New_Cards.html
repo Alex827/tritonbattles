@@ -101,7 +101,7 @@
 		<div class="col-md-6">
 			<div id="yourCards"><h1>Card Preview</h1></div>
 		<!-- All Cards -->
-				<div class="allCards" style="height:360px;width:520px;border:0px solid #ccc;font:16px/26px Georgia, Garamond, Serif;overflow:auto;">
+				<div class="allCards" style="height:360px;width:520px;border:0px solid #ccc;font:16px/26px; overflow:auto;">
 					<div class="card">
 		                <div class="flashcard">
 		                    <div class="flipper">
@@ -171,6 +171,10 @@
                         <button type="button" class="btn btn-primary btn-sm addCard" onclick="addCard()">Add Card</button>
                         <br />
                         <h5 id="statusMessage">Please click "Add Card" button to submit.</h5>
+                        <input type="text" id="deckTitle" placeholder="Type in your deck title">
+                        <br />
+                        <input type="text" id="deckTags" placeholder="Type in your deck tags">
+						<br />                        
                         <button type="button" class="btn btn-primary btn-sm createDeckBtn" onclick="addDeck()">Create a Deck</button>                 
 					</div>
                     

@@ -1,7 +1,12 @@
+// import to get sendScore()
+//$.getScript("../../routes/search.js");
+$.getScript("../../routes/update.js");
+
 // get cards from database
 var cards = getSet();
 // parses the database into JSON
 var obj = JSON.parse(cards);
+
 var index = 0;
 var choices = document.getElementsByClassName("choice");
 // max card index for set
@@ -17,8 +22,6 @@ var endTime = 0;
 // score to send
 var score = 0;
 
-// import to get sendScore()
-$.getScript("../../routes/update.js");
 
 // starts the competition
 function start() {
@@ -44,6 +47,11 @@ function start() {
 function end() {
     // tags to be passed into send score function
     var tags = GetURLParameter("tags");
+    var deckid = GetURLParameter("deck");
+    
+    if( tags == undefined ) {
+        tags = obj.tags;
+    }
 
     // reset choice backgrounds
     document.getElementById("choice1").style.background = 'transparent';
@@ -144,12 +152,34 @@ function getSet()
 {
 	var http = new XMLHttpRequest();
     var tags = GetURLParameter('tags');
-    console.log(tags);
-    http.open('GET', '/api/searchcards?tags='+tags, false);
-	http.send();
-	var jsonObjects = http.responseText;
-	console.log(jsonObjects);
-	return jsonObjects;
+    var deckid = GetURLParameter('deck');
+    console.log(deckid);
+//    console.log(tags);
+    if( tags != undefined ) {
+        http.open('GET', '/api/searchcards?tags='+tags, false);
+        http.send();
+        var jsonObjects = http.responseText;
+    	console.log(jsonObjects);
+        console.log(typeof jsonObjects);
+//        jsonObjects = JSON.parse(jsonObjects);
+        return jsonObjects;
+    }
+    else {
+        http.open('GET', '/api/getcardsindeck?id='+deckid, false);
+        http.send();
+        var jsonObjects = http.responseText;
+        return jsonObjects;
+        /*
+        var cardArr = [];
+//        console.log(jsonObjects);
+        jsonObjects = JSON.parse(jsonObjects);
+    	console.log(jsonObjects[0].cards);
+        for( var i = 0; i < jsonObjects[0].cards.length; i++) {
+            cardArr[i] = getById(jsonObjects[0].cards[i], function(e){}, false);
+            console.log("["+cardArr.toString()+"]");
+        }
+        return "["+cardArr.toString()+"]";*/
+    }
 }
 
 // gets the percentage for the progress bar
@@ -195,12 +225,27 @@ function choiceClick(choiceNum){
 
 // goes to the study page for this set
 function goStudy() {
-    window.location = "../Study_Card.html?tags=" + GetURLParameter("tags");
+    var tags = GetURLParameter('tags');
+    var deckid = GetURLParameter('deck');
+    
+    if( tags != undefined ) {
+        window.location = "../Study_Card.html?tags=" + tags;
+    }
+    else {
+            window.location = "../Study_Card.html?deck=" + deckid;
+    }
 }
 
 // goes to the leaderboard for this set
 function goLeaderB() {
-    window.location = "../Leaderboard.html?tags=" + GetURLParameter("tags");
+    var tags = GetURLParameter('tags');
+    var deckid = GetURLParameter('deck');
+    if( tags != undefined ) {
+        window.location = "../Leaderboard.html?tags=" + tags;
+    }
+    else {
+        window.location = "../Leaderboard.html?tags=" + deckid;
+    }
 }
 
 // starts timer
@@ -228,6 +273,30 @@ function parseTime(time) {
     toRet += Number(bufArray[2]);
 
     return toRet;
+}
+
+//id = String
+//callback = function(String)
+function getById(id, callback, async){
+    async = typeof async !== 'undefined' ? async : true;
+    var http = new XMLHttpRequest();
+    var url = "/api/getbyid?id=" + id;
+    http.open('GET', url, async);
+    http.onreadystatechange = function(){
+        if(http.readyState == 4){
+            if(http.status == 200){
+                callback("Success:" + http.responseText);
+            }else{
+                //failure
+                console.log("Error searching by ID: " + http.responseText);
+                callback("Failure:" + http.responseText);
+            }
+        }
+    }
+    http.send();
+    if(!async){
+        return http.responseText;   
+    }
 }
 
 //function resumeTimer(){
