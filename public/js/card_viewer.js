@@ -3,10 +3,6 @@ var cards = getSet();
 // parses the database into JSON
 var obj = JSON.parse(cards);
 var index = 0;
-var answers = document.getElementById("answers");
-var choices = document.getElementsByClassName("choice");
-var flipButton = document.getElementById("flipButton");
-var solution = document.getElementById("solution");
 // max card index for set
 var maxIndex = obj.length;
 var spacebarKey = 32;
@@ -15,12 +11,64 @@ var rightArrowKey = 39;
 var fKey = 70;
 var jKey = 74;
 var kKey = 75;
+var answers;// = document.getElementById("answers");
+var choices;// = document.getElementsByClassName("choice");
+var flipButton;// = document.getElementById("flipButton");
+var solution;// = document.getElementById("solution");
+var lastButton;// = document.getElementById("lastButton");
+var nextButton;// = document.getElementById("nextButton");
+var question;// = document.getElementById("question");
+var tags;// = document.getElementById("tagsArea");
+
+$(document).ready( function() {
+    // allows for keyboard to control the card
+    if( $('body').hasClass( "useKeyboard" ) ) {
+   		$(document).keyup( function(e) {
+       	// spacebar flips the card
+    	if( e.keyCode == spacebarKey ) {
+        	e.preventDefault();
+        	flipCard();
+    	}
+    	// left arrow key goes to next card
+    	if( e.which == leftArrowKey || e.which == jKey) {
+        	lastCard();
+    	}
+    	// right arrow key goes to prev card
+    	if( e.which == rightArrowKey || e.which == kKey) {
+        	nextCard();
+    	}
+   		});
+	}
+    /*---------Set up vars---------*/
+    answers = document.getElementById("answers");
+    choices = document.getElementsByClassName("choice");
+    flipButton = document.getElementById("flipButton");
+    solution = document.getElementById("solution");
+    lastButton = document.getElementById("lastButton");
+	nextButton = document.getElementById("nextButton");
+	question = document.getElementById("question");
+    tags = document.getElementById("tagsArea");
+    
+    // immediately load up card
+    nextCard();
+    console.log(choices);
+});
 
 
-// shows the solution
-function showSolution() {
-	solution.style.visibility = "visible";
+function getDeckTitle(){
+    var deckTitleField = document.getElementById("deckTitle");
+    var deckid = GetURLParameter("deck");
+    if( deckid ) {
+        var deckTitle = 
+        deckTitleField.removeAttribute("hidden");
+        deckTitleField.innerHTML
+    }
+    
 }
+// shows the solution
+//function showSolution() {
+//	solution.style.visibility = "visible";
+//}
 
 // handles the choice buttons
 function choiceClick(choiceNum){
@@ -51,13 +99,14 @@ function getPerc() {
 // moves onto the next card
 function nextCard() {
 	if( index < maxIndex ) {
+    $("#solution").css("visibility","hidden");
 	// DOM variables
 	var numOfChoices = obj[index].answers.length;
-	var lastButton = document.getElementById("lastButton");
-	var nextButton = document.getElementById("nextButton");
-	var question = document.getElementById("question");
-	var solution = document.getElementById("solution");
-    var tags = document.getElementById("tagsArea");
+//	var lastButton = document.getElementById("lastButton");
+//	var nextButton = document.getElementById("nextButton");
+//	var question = document.getElementById("question");
+//    var tags = document.getElementById("tagsArea");
+//	var solution = document.getElementById("solution");
 
 	// initially set both buttons to disabled
 	lastButton.disabled = true;
@@ -81,10 +130,11 @@ function nextCard() {
 		$('.front').addClass('active');
 	}
 	// shows the solution after the flipping animation
-	setTimeout(showSolution, 300);
+//	setTimeout(showSolution, 300);
 
 	// popluates the question
 	question.innerHTML = "<strong>"+obj[index].question+"</strong>";
+    console.log(choices);
     // populates the choices
 	for(i = 0; i < numOfChoices; i++) {
 		choices[i].removeAttribute("hidden");
@@ -183,32 +233,16 @@ function flipCard() {
 	}
 }
 
-
-$(document).ready( function() {
-
-    // allows for keyboard to control the card
-    if( $('body').hasClass( "useKeyboard" ) ) {
-   		$(document).keyup( function(e) {
-       	// spacebar flips the card
-    	if( e.keyCode == spacebarKey ) {
-        	e.preventDefault();
-        	flipCard();
-    	}
-    	// left arrow key goes to next card
-    	if( e.which == leftArrowKey || e.which == jKey) {
-        	lastCard();
-    	}
-    	// right arrow key goes to prev card
-    	if( e.which == rightArrowKey || e.which == kKey) {
-        	nextCard();
-    	}
-   		});
-	}
-    
-    // immediately load up card
-    nextCard();
-});
-
+// link challenge button
+function linkChallenge(){
+    var tags = GetURLParameter("tags");
+    var deckid = GetURLParameter("deck");
+    var $challengeLink = $("#challengeBtn").attr("href");
+    if((tags && tags.length > 0) || !deckid)
+        $("#challengeBtn").attr("href", $challengeLink+"tags="+ tags);
+    else
+        $("#challengeBtn").attr("href", $challengeLink+"deck="+ deckid);
+}
 
 
 
