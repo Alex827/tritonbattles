@@ -11,14 +11,16 @@ var rightArrowKey = 39;
 var fKey = 70;
 var jKey = 74;
 var kKey = 75;
-var answers;// = document.getElementById("answers");
-var choices;// = document.getElementsByClassName("choice");
-var flipButton;// = document.getElementById("flipButton");
-var solution;// = document.getElementById("solution");
-var lastButton;// = document.getElementById("lastButton");
-var nextButton;// = document.getElementById("nextButton");
-var question;// = document.getElementById("question");
-var tags;// = document.getElementById("tagsArea");
+// initalize global DOM avrs
+var answers;
+var choices;
+var flipButton;
+var solution;
+var lastButton;
+var nextButton;
+var question;
+var tags;
+var deckTitle;
 
 $(document).ready( function() {
     // allows for keyboard to control the card
@@ -39,7 +41,8 @@ $(document).ready( function() {
     	}
    		});
 	}
-    /*---------Set up vars---------*/
+    
+    /*---------Assign DOM vars---------*/
     answers = document.getElementById("answers");
     choices = document.getElementsByClassName("choice");
     flipButton = document.getElementById("flipButton");
@@ -48,27 +51,26 @@ $(document).ready( function() {
 	nextButton = document.getElementById("nextButton");
 	question = document.getElementById("question");
     tags = document.getElementById("tagsArea");
+    deckTitle = document.getElementById("deckTitle");
     
     // immediately load up card
     nextCard();
-    console.log(choices);
+    // gets the deck title
+    getDeckTitle();
 });
 
 
 function getDeckTitle(){
-    var deckTitleField = document.getElementById("deckTitle");
     var deckid = GetURLParameter("deck");
+    
     if( deckid ) {
-        var deckTitle = 
-        deckTitleField.removeAttribute("hidden");
-        deckTitleField.innerHTML
+        var title = JSON.parse(getById(deckid, function(e){}, false)).title;
+        
+        deckTitle.removeAttribute("hidden");
+        deckTitle.innerHTML = "Title of Deck: "+title;
     }
     
 }
-// shows the solution
-//function showSolution() {
-//	solution.style.visibility = "visible";
-//}
 
 // handles the choice buttons
 function choiceClick(choiceNum){
@@ -77,20 +79,15 @@ function choiceClick(choiceNum){
 
     // if correct, turn green
 	if( choiceNum.innerHTML == solutionTrimmed )
-	{
 		choiceNum.style.background = '#BCED91'
-	}
     // else turn red
 	else
-	{
 		choiceNum.style.background = '#E3170D'
-	}
 }
 
 // gets the percentage for the progress bar
 function getPerc() {
 	var perc = Math.ceil((index/maxIndex)*100);
-	//console.log(perc);
 	$(".progress-bar").attr("aria-valuenow", perc);
 	$(".progress-bar").html(perc+"%");
 	$(".progress-bar").css("width", perc+"%");
@@ -102,11 +99,6 @@ function nextCard() {
     $("#solution").css("visibility","hidden");
 	// DOM variables
 	var numOfChoices = obj[index].answers.length;
-//	var lastButton = document.getElementById("lastButton");
-//	var nextButton = document.getElementById("nextButton");
-//	var question = document.getElementById("question");
-//    var tags = document.getElementById("tagsArea");
-//	var solution = document.getElementById("solution");
 
 	// initially set both buttons to disabled
 	lastButton.disabled = true;
@@ -134,7 +126,6 @@ function nextCard() {
 
 	// popluates the question
 	question.innerHTML = "<strong>"+obj[index].question+"</strong>";
-    console.log(choices);
     // populates the choices
 	for(i = 0; i < numOfChoices; i++) {
 		choices[i].removeAttribute("hidden");
@@ -196,19 +187,16 @@ function GetURLParameter(sParam) {
 }
 
 // gets the cards from the database
-function getSet()
-{
+function getSet(){
 	var http = new XMLHttpRequest();
     var tags = GetURLParameter('tags');
     var deckid = GetURLParameter('deck');
-    //console.log(tags);
     if((tags && tags.length > 0) || !deckid)
         http.open('GET', '/api/searchcards?tags='+tags, false);
 	else
         http.open('GET', '/api/getcardsindeck?id=' + deckid, false);
     http.send();
 	var jsonObjects = http.responseText;
-	// console.log(jsonObjects);
 	return jsonObjects;
 }
 
