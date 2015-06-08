@@ -31,6 +31,8 @@ function addCard()
     var solution = "";
     // the status message
     var $statusM = $("#statusMessage");
+    // boolean to return if error
+    var errorBool = false;
 
     // if no question is inputted then give user error
     if( questionFromField == "" ) {
@@ -97,6 +99,7 @@ function addCard()
         // if the card is in the database, then do not make card
         if( cardID !== "[]" ) {
             errStatusMessage("Card was already made. Please try again.");
+            errorBool = true;
             return;
         }
         // else make the card and get its ID
@@ -116,6 +119,11 @@ function addCard()
             }, false);
         }
     }, false);
+    
+    // if there was an error then return
+    if( errorBool ) {
+        return;
+    }
 
     //put the card ID into an array to be used later for making a deck
     cardIDArray.push(cardIDToSave);
