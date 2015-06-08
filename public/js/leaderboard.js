@@ -1,9 +1,3 @@
-// gets the getLeaderboard()
-$.holdReady(true);
-$.getScript("../../routes/search.js", function() {
-    $.holdReady(false);
-});
-
 // updates the leaderboard
 function updateLeaderB() {
     // get the tags
