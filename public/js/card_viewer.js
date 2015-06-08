@@ -1,10 +1,10 @@
 // get cards from database
-var cards = getSet();
+var cards;
 // parses the database into JSON
-var obj = JSON.parse(cards);
+var obj;
 var index = 0;
 // max card index for set
-var maxIndex = obj.length;
+var maxIndex;
 var spacebarKey = 32;
 var leftArrowKey = 37;
 var rightArrowKey = 39;
@@ -21,6 +21,8 @@ var nextButton;
 var question;
 var tags;
 var deckTitle;
+var deckid;
+var tagsURL;
 
 $(document).ready( function() {
     // allows for keyboard to control the card
@@ -53,21 +55,35 @@ $(document).ready( function() {
     tags = document.getElementById("tagsArea");
     deckTitle = document.getElementById("deckTitle");
     
+    /*---------URL Parameters---------*/
+    deckid = GetURLParameter("deck");
+    tagsURL = GetURLParameter("tags");
+    
+    // get cards
+    cards = getSet();
+    obj = JSON.parse(cards);
+    maxIndex = obj.length;
     // immediately load up card
     nextCard();
     // gets the deck title
     getDeckTitle();
 });
 
-
+// populates the deck title if it is there
 function getDeckTitle(){
-    var deckid = GetURLParameter("deck");
-    
+    var strong = document.createElement("STRONG");
+    // if there is a deck id
     if( deckid ) {
-        var title = JSON.parse(getById(deckid, function(e){}, false)).title;
-        
+        // show the test
         deckTitle.removeAttribute("hidden");
-        deckTitle.innerHTML = "Title of Deck: "+title;
+        // get the deck title
+        var title = JSON.parse(getById(deckid, function(e){}, false)).title;
+        // make title strong
+        title = document.createTextNode(title);
+        strong.appendChild(title);
+        // add it to page
+        deckTitle.innerHTML = "Title of Deck: "
+        deckTitle.appendChild(strong);
     }
     
 }
@@ -189,10 +205,11 @@ function GetURLParameter(sParam) {
 // gets the cards from the database
 function getSet(){
 	var http = new XMLHttpRequest();
-    var tags = GetURLParameter('tags');
-    var deckid = GetURLParameter('deck');
-    if((tags && tags.length > 0) || !deckid)
-        http.open('GET', '/api/searchcards?tags='+tags, false);
+    console.log(deckid);
+//    var tags = GetURLParameter('tags');
+//    var deckid = GetURLParameter('deck');
+    if((tagsURL && tagsURL.length > 0) || !deckid)
+        http.open('GET', '/api/searchcards?tags='+tagsURL, false);
 	else
         http.open('GET', '/api/getcardsindeck?id=' + deckid, false);
     http.send();
@@ -223,11 +240,11 @@ function flipCard() {
 
 // link challenge button
 function linkChallenge(){
-    var tags = GetURLParameter("tags");
-    var deckid = GetURLParameter("deck");
+//    var tags = GetURLParameter("tags");
+//    var deckid = GetURLParameter("deck");
     var $challengeLink = $("#challengeBtn").attr("href");
-    if((tags && tags.length > 0) || !deckid)
-        $("#challengeBtn").attr("href", $challengeLink+"tags="+ tags);
+    if((tagsURL && tagsURL.length > 0) || !deckid)
+        $("#challengeBtn").attr("href", $challengeLink+"tags="+ tagsURL);
     else
         $("#challengeBtn").attr("href", $challengeLink+"deck="+ deckid);
 }
