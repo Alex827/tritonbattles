@@ -6,9 +6,17 @@ body {
     display: none; 
 }
 .nav-side{
-	width:300px;
-	padding-left:10px;
-	padding-right:10px;
+    line-height: 30px;
+    background-color: #eeeeee;
+    float: left;
+    padding: 5px;
+    position: fixed;
+    top: 50px;
+    height: 100%;
+    width: 300px;
+    z-index: 8px;
+/*    overflow:scroll;*/
+    text-align: center;
 }
 /*Search bar appearance. Can modify for square vs round search bar*/
 .rounded { 
@@ -46,7 +54,7 @@ body {
 /*Top header bar*/
 .topBar {
 	background-color: #0099FF;
-	position: absolute;
+	position: fixed;
 	height: 56px;
 	width:100%;
 	top:0;
@@ -57,9 +65,9 @@ body {
 	display: inline;
 }
 .leftButtonPos {
-position:absolute;
-left:87%;
-top:13px;
+    position:absolute;
+    left:87%;
+    top:13px;
 }
 .rightButtonPos {
 	position: absolute;
@@ -117,7 +125,16 @@ body {
 		top:50px;
 	}
 	.nav-side{
+        padding-top: 34px;
+        height: 150px;
 		width:100%;
+        float: left;
+        text-align: center;
 	}
+    
+    .nav-side *{
+        margin-top: 3%;
+        float: left;
+    }
 	
 }

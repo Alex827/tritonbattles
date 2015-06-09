@@ -1,22 +1,12 @@
 body{
     overflow: hidden;
 }
-.Back_to_Search{
-	position: absolute;
-	left: 50px;
-	top: 100px;
-}
+
 .backButton {
-    position:absolute;
-    left:50%;
-    margin-left:68px;
+   margin-top: 3%;
 }
 
-.Back_to_Search a:link, .Back_to_Search a:visited{
-	text-decoration: none;
-	cursor: auto;
-}
-
+/*
 #nav-side {
     line-height: 30px;
     background-color: #eeeeee;
@@ -33,6 +23,7 @@ body{
     top: 10px;
     left: 10px;
 }
+*/
 
 .card_layout{
 	position: absolute;
@@ -143,18 +134,23 @@ body{
         left: 50%;
         margin-left:-200px;
     }
+/*
     #nav-side {
         height:150px;
         width:100%;
     }
+*/
+/*
     .backButton {
         position:absolute;
         top:60px;
         left:50%;
         margin-left: 125px;
     }
+*/
 }
 
+/*
 .log_sign_but{
     padding-left: 10px;
-}
+}*/

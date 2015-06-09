@@ -1,17 +1,21 @@
 .set{
 	position: absolute;
     overflow: auto;
-	left: 360px;
+	left: 40%;
 	top: 55px;
+    z-index: -1;
 }
 
 .images {
     display: inline-block;
 }
 
+/*
 .topBar{
     position: fixed;
 }
+*/
+/*
 .nav-side {
     background-color: #eeeeee;
 	height: 100%;
@@ -20,7 +24,21 @@
     text-align: center;
     overflow: hidden;
 }
+*/
 
 @media screen and (max-width: 900px) {
-	
+    .set{
+        top: 200px;
+        left: 50%;
+        margin-left:-200px;
+    }
+    .navText, .navText * {
+/*        position:absolute;*/
+/*        display: inline;*/
+        float: left;
+        padding-left: 5%;
+/*        top:60px;*/
+/*        left:50%;*/
+/*        margin-left: 125px;*/
+    }
 }

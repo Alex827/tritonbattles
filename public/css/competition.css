@@ -1,3 +1,4 @@
+/*
 
 #nav-side {
     line-height: 30px;
@@ -15,6 +16,8 @@
     top: 10px;
     left: 10px;
 }
+*/
+
 .card_layout{
 	position: absolute;
 	left: 40%;
@@ -83,26 +86,31 @@
 .choice:hover{
     border-color: rgba(0,0,0,0.5);
 }
-    .backButton {
-        position:absolute;
-        left:50%;
-        margin-left:68px;
-    }
+
+.backButton {
+   margin-top: 3%;
+}
 
 @media screen and (max-width: 900px) {
 
+/*
     #nav-side {
         height:150px;
         width:100%;
     }
+*/
     .backButton {
+/*        float: left;*/
+/*
         position:absolute;
         top:60px;
         left:50%;
         margin-left: 125px
+*/
     }
-    .card_layout{
-        left:20px;
-    top: 300px;
-}
+    .card_layout {
+        top: 220px;
+        left: 50%;
+        margin-left:-200px;
+    }
 }
