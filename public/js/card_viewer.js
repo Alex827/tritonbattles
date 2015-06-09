@@ -112,71 +112,69 @@ function getPerc() {
 // moves onto the next card
 function nextCard() {
 	if( index < maxIndex ) {
-    $("#solution").css("visibility","hidden");
-	// DOM variables
-	var numOfChoices = obj[index].answers.length;
+        // hide solution
+        $("#solution").css("visibility","hidden");
+        
+        // DOM variables
+        var numOfChoices = obj[index].answers.length;
 
-	// initially set both buttons to disabled
-	lastButton.disabled = true;
-	nextButton.disabled = true;
+        // initially set both buttons to disabled
+        lastButton.disabled = true;
+        nextButton.disabled = true;
 
-	//If at 1 then will be at 2 after this method performs
-	if(index > 0){
-		lastButton.disabled = false;
-	}
-	if(index < maxIndex) {
-		nextButton.disabled = false;
-	}
+        //If at 1 then will be at 2 after this method performs
+        if(index > 0){
+            lastButton.disabled = false;
+        }
+        if(index < maxIndex) {
+            nextButton.disabled = false;
+        }
 
-	// hides solution until card has loaded/flipped
-	solution.style.visibility = "hidden";
+        // hides solution until card has loaded/flipped
+        solution.style.visibility = "hidden";
 
-	// if on the back of the card when next is clicked, flip back to front
-	if( $('.back').hasClass('active') ) {
-		$('.flipper').css( {transform: "rotateY(0deg)"});
-		$('.back').removeClass('active');
-		$('.front').addClass('active');
-	}
-	// shows the solution after the flipping animation
-//	setTimeout(showSolution, 300);
+        // if on the back of the card when next is clicked, flip back to front
+        if( $('.back').hasClass('active') ) {
+            $('.flipper').css( {transform: "rotateY(0deg)"});
+            $('.back').removeClass('active');
+            $('.front').addClass('active');
+        }
 
-	// popluates the question
-	question.innerHTML = "<strong>"+obj[index].question+"</strong>";
-    // populates the choices
-	for(i = 0; i < numOfChoices; i++) {
-		choices[i].removeAttribute("hidden");
-		choices[i].innerHTML = obj[index].answers[i];
-		choices[i].innerHTML = choices[i].innerHTML.trim();
-	}
+        // popluates the question
+        question.innerHTML = "<strong>"+obj[index].question+"</strong>";
+        // populates the choices
+        for(i = 0; i < numOfChoices; i++) {
+            choices[i].removeAttribute("hidden");
+            choices[i].innerHTML = obj[index].answers[i];
+            choices[i].innerHTML = choices[i].innerHTML.trim();
+        }
 
-	//Prevents extra showing of previous options
-    // also keeps it to only 4 multiple choices options
-	for(a = numOfChoices; a < 4; a++){
-		choices[a].setAttribute("hidden", true);
-	}
-    // populates the solution
-	solution.innerHTML = obj[index].solution;
+        // keeps it to only 4 multiple choices options
+        for(a = numOfChoices; a < 4; a++){
+            choices[a].setAttribute("hidden", true);
+        }
+        // populates the solution
+        solution.innerHTML = obj[index].solution;
+        // populates the tags
+        tags.innerHTML = "Tags: "+obj[index].tags;
+        // reset choice backgrounds
+        document.getElementById("choice1").style.background = 'transparent';
+        document.getElementById("choice2").style.background = 'transparent';
+        document.getElementById("choice3").style.background = 'transparent';
+        document.getElementById("choice4").style.background = 'transparent';
 
-    tags.innerHTML = "Tags: "+obj[index].tags;
-	// reset choice backgrounds
-	document.getElementById("choice1").style.background = 'transparent';
-	document.getElementById("choice2").style.background = 'transparent';
-	document.getElementById("choice3").style.background = 'transparent';
-	document.getElementById("choice4").style.background = 'transparent';
+        //Disable next or last buttons if at the beginning or end of set
+        if(index >= maxIndex)
+            document.getElementById("nextButton").disabled = true;
+        if(index < 0)
+            document.getElementById("lastButton").disabled = true;
 
-	//Disable next or last buttons if at the beginning or end of set
-	if(index >= maxIndex)
-		document.getElementById("nextButton").disabled = true;
-	if(index < 0)
-		document.getElementById("lastButton").disabled = true;
-
-	// increases the card index
-	if(index < maxIndex) {
-		index++;
-	}
-
-	//console.log(index);
-	getPerc();
+        // increases the card index
+        if(index < maxIndex) {
+            index++;
+        }
+        // update the percentage bar
+        getPerc();
 	}
 }
 
@@ -205,9 +203,7 @@ function GetURLParameter(sParam) {
 // gets the cards from the database
 function getSet(){
 	var http = new XMLHttpRequest();
-    console.log(deckid);
-//    var tags = GetURLParameter('tags');
-//    var deckid = GetURLParameter('deck');
+    // check URL parameters for tags or deck ID
     if((tagsURL && tagsURL.length > 0) || !deckid)
         http.open('GET', '/api/searchcards?tags='+tagsURL, false);
 	else
@@ -216,7 +212,6 @@ function getSet(){
 	var jsonObjects = http.responseText;
 	return jsonObjects;
 }
-
 
 // flips the card
 function flipCard() {
@@ -239,9 +234,7 @@ function flipCard() {
 }
 
 // link challenge button
-function linkChallenge(){
-//    var tags = GetURLParameter("tags");
-//    var deckid = GetURLParameter("deck");
+function linkChallenge() {
     var $challengeLink = $("#challengeBtn").attr("href");
     if((tagsURL && tagsURL.length > 0) || !deckid)
         $("#challengeBtn").attr("href", $challengeLink+"tags="+ tagsURL);

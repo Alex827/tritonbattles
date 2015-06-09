@@ -1,29 +1,36 @@
-// get cards from database
-var cards = getSet();
-// parses the database into JSON
-var obj = JSON.parse(cards);
+function init() {
+    // card index
+    index = 0;
+    // number correct
+    numCorrect = 0;
+    // number wrong
+    numWrong = 0;
+    // percentage correct
+    percCorrect = 0;
+    // time it took
+    endTime = 0;
+    // score to send
+    score = 0;
 
-var index = 0;
-var choices = document.getElementsByClassName("choice");
-// max card index for set
-var maxIndex = obj.length;
-// number correct
-var numCorrect = 0;
-// number wrong
-var numWrong = 0;
-// percentage correct
-var percCorrect = 0;
-// time it took
-var endTime = 0;
-// score to send
-var score = 0;
+    // DOM variable
+    choices = document.getElementsByClassName("choice");
+    startButton = document.getElementById("startBtn");
 
+    // URL Parameters
+    tags = GetURLParameter("tags");
+    deckid = GetURLParameter("deck");
+    
+    // get cards from database
+    cards = getSet();
+    // parses the database into JSON
+    obj = JSON.parse(cards);
+    // max card index for set
+    maxIndex = obj.length;
+    
+}
 
 // starts the competition
 function start() {
-    // gets the start button
-    var startButton = document.getElementById("startBtn");
-
     // reset indexes and counters
     index = 0;
     numCorrect = 0;
@@ -41,18 +48,13 @@ function start() {
 
 // ends the competition
 function end() {
-    // tags to be passed into send score function
-    var tags = GetURLParameter("tags");
-    var deckid = GetURLParameter("deck");
-    
+    // if no URL tags
     if( tags == undefined ) {
         var jsonObjects;
         getById(deckid, function(e) {
             jsonObjects = JSON.parse(e.substr(8));
         }, false);
         tags = jsonObjects.tags;
-//        tags = obj.tags;
-//        console.log(tags);
     }
 
     // reset choice backgrounds
@@ -74,11 +76,11 @@ function end() {
 
     //stop timer
     stopTimer();
-//    console.log("called stop timer");
+    // calculate score
     endTime = document.getElementById("theTime").children[0].innerHTML;
     endTime = parseTime(endTime);
     score = endTime/maxIndex;
-//        console.log("score sent " + score);
+    // send score
     sendScore(score, tags, function(e){
     }, false);
     score = Math.ceil(score);
@@ -150,20 +152,12 @@ function GetURLParameter(sParam) {
 }
 
 // gets the cards from the database
-function getSet()
-{
+function getSet() {
 	var http = new XMLHttpRequest();
-    var tags = GetURLParameter('tags');
-    var deckid = GetURLParameter('deck');
-//    console.log(deckid);
-//    console.log(tags);
-    if( tags != undefined ) {
+    if( tags ) {
         http.open('GET', '/api/searchcards?tags='+tags, false);
         http.send();
         var jsonObjects = http.responseText;
-//    	console.log(jsonObjects);
-//        console.log(typeof jsonObjects);
-//        jsonObjects = JSON.parse(jsonObjects);
         return jsonObjects;
     }
     else {
@@ -171,23 +165,12 @@ function getSet()
         http.send();
         var jsonObjects = http.responseText;
         return jsonObjects;
-        /*
-        var cardArr = [];
-//        console.log(jsonObjects);
-        jsonObjects = JSON.parse(jsonObjects);
-    	console.log(jsonObjects[0].cards);
-        for( var i = 0; i < jsonObjects[0].cards.length; i++) {
-            cardArr[i] = getById(jsonObjects[0].cards[i], function(e){}, false);
-            console.log("["+cardArr.toString()+"]");
-        }
-        return "["+cardArr.toString()+"]";*/
     }
 }
 
 // gets the percentage for the progress bar
 function getPerc() {
 	var perc = Math.ceil((index/maxIndex)*100);
-	//console.log(perc);
 	$(".progress-bar").attr("aria-valuenow", perc);
 	$(".progress-bar").html(perc+"%");
 	$(".progress-bar").css("width", perc+"%");
@@ -209,27 +192,17 @@ function choiceClick(choiceNum){
             choiceNum.style.background = '#E3170D'
             numWrong = numWrong + 1;
             addMillis(5000);
-//            console.log("time added");
         }
 
         // increases the card index
-        if(index < maxIndex) {
-            index++;
-        }
-        // goes to next card
-        nextCard();
-
+        index++;
     }
-    else { // calls nextCard() for checking
-        nextCard();
-    }
+    // calls nextCard() for checking
+    nextCard();
 }
 
 // goes to the study page for this set
-function goStudy() {
-    var tags = GetURLParameter('tags');
-    var deckid = GetURLParameter('deck');
-    
+function goStudy() {    
     if( tags != undefined ) {
         window.location = "../Study_Card.html?tags=" + tags;
     }
@@ -241,18 +214,11 @@ function goStudy() {
 // goes to the leaderboard for this set
 function goLeaderB() {
     var http = new XMLHttpRequest();
-    var tags = GetURLParameter('tags');
-    var deckid = GetURLParameter('deck');
     
     if( tags != undefined ) {
         window.location = "../Leaderboard.html?tags=" + tags;
     }
     else {
-//        var jsonObjects = JSON.parse(http.responseText);
-//        console.log(jsonObjects);
-//        http.open('GET', '/api/searchdecks?id='+deckid, false);
-//        http.send();
-//        console.log(tags);
         var jsonObjects;
         getById(deckid, function(e) {
             jsonObjects = JSON.parse(e.substr(8));
@@ -269,7 +235,6 @@ function startTimer() {
 
 // stops timer
 function stopTimer() {
-    //console.log("stopped");
     document.getElementsByTagName('timer')[0].stop();
 }
 
@@ -312,7 +277,3 @@ function getById(id, callback, async){
         return http.responseText;   
     }
 }
-
-//function resumeTimer(){
-//    document.getElementsByTagName('timer')[0].resume();
-//}

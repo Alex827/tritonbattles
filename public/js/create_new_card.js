@@ -1,16 +1,13 @@
-// import
-$.getScript("../routes/create.js");
-$.getScript("../routes/search.js");
 // the card array that holds the card ID's to make a deck out of it
-var cardIDArray = [];
+cardIDArray = [];
 // the card array for dynamic displaying
-var cardArray = [];
+cardArray = [];
 // the card ID to save into the array
-var cardIDToSave;
+cardIDToSave = [];
 // time offset to change back to default status messgae
-var timeOffset = 1500;
+timeOffset = 1500;
 // index for cards made
-var indexCreate = 0;
+indexCreate = 0;
 
 //NOTE TO SELF MAKE SURE THAT THE PATH NAME IS CORRECT FOR THIS
 function addCard() {
@@ -213,7 +210,6 @@ function nextCardCreate() {
 	if( indexCreate < cardIDArray.length ) {
         $("#solution").css("visibility","hidden");
         // DOM variables
-            console.log(indexCreate);
         var numOfChoices = cardArray[indexCreate].answers.length;
         var lastButton = document.getElementById("lastButton");
         var nextButton = document.getElementById("nextButton");
@@ -263,14 +259,8 @@ function updateCardArrInfo() {
     // the two default messages
     var defMess1 = "Your current card: ";
     var defMess2 = " Total Cards: ";
-    // if there hasn't been a change then update
-////    if( cardArrStatus.innerHTML == defMess1 ) {
-//        cardArrStatus.innerHTML += indexCreate + defMess2 + cardArray.length;
-//    }
-    // update if there is a chagng
-//    else {
-        cardArrStatus.innerHTML = defMess1 + indexCreate + defMess2 + cardArray.length;
-//    }
+    // update the message
+    cardArrStatus.innerHTML = defMess1 + indexCreate + defMess2 + cardArray.length;
 }
 
 // goes to prev card
@@ -282,36 +272,3 @@ function lastCardCreate(){
 	}
 	nextCardCreate(); //nextCard
 }
-
-
-//$('document').ready(function() {
-//    var question = document.getElementById("question");
-//    var $checkedRadio = $('input[type=radio][name=pickSolution]');
-//
-//    // populate the question field
-//    $('#question-field').bind('keyup keydown keypress', function() {
-//        question.innerHTML = $('#question-field').val();
-//    });
-//    // populate the choices
-//    $('#answer1').bind('keyup keydown keypress', function() {
-//        $('#choice1').html( $('#answer1').val() );
-//    });
-//    $('#answer2').bind('keyup keydown keypress', function() {
-//        $('#choice2').html( $('#answer2').val() );
-//    });
-//    $('#answer3').bind('keyup keydown keypress', function() {
-//        $('#choice3').html( $('#answer3').val() );
-//    });
-//    $('#answer4').bind('keyup keydown keypress', function() {
-//        $('#choice4').html( $('#answer4').val() );
-//    });
-//    // populate the solution
-//    $checkedRadio.click( function() {
-//        var correctSolution = $checkedRadio.filter(":checked").next();
-//        $('#solution').html( correctSolution.val() );
-//
-//        correctSolution.bind('keyup keydown keypress', function() {
-//            $('#solution').html( correctSolution.val() );
-//        });
-//    });
-//});
