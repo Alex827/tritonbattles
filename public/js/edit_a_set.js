@@ -1,3 +1,7 @@
+/* 
+ * Depends on 
+ *  search.js for searchCards() 
+ *  update.js for editCard() */
 var obj;
 var flag = null;
 var deckid;

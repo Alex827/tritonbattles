@@ -5,99 +5,92 @@
         <script src="../node_modules/angular/angular.min.js"></script>
         
 		<link rel="stylesheet" type="text/css" href="css/basicboot.css">
-		<link rel="stylesheet" type="text/css" href="css/create_new_cards.css">
         <link rel="stylesheet" type="text/css" href="css/login.css">
         <link rel="stylesheet" type="text/css" href="css/sign_up.css">
-        <link rel="stylesheet" type="text/css" href="css/popUp.css">
+		<link rel="stylesheet" type="text/css" href="css/create_new_cards.css">
         
-		<script type="text/javascript" src="/js/create_new_card.js"></script>
         <script type="text/javascript" src="/js/card_viewer.js"></script>
-        <script src="../views/login.js" type="text/javascript"></script>
-        <script type="text/javascript" src="js/popUp.js"></script>
+		<script type="text/javascript" src="/js/create_new_card.js"></script>
 	</head>
 
 <body ng-app="">
-
 <div ng-include="'topBar.html'"></div>
-
-		<!-- Header -->
-		<div class="col-md-6">
-			<div id="yourCards"><h1>Card Preview</h1></div>
-		<!-- All Cards -->
-				<div class="allCards">
-					<div class="card">
-		                <div class="flashcard">
-		                    <div class="flipper">
-		                        <div class="front active" display="block">
-		                            <br />
-		                            <div class ="question" id="question"><b>Question</b></div>
-		                            <br />
-		                            <div class="answers" id="answers" style="text-align:center;">
-		                                <button class="choice roundedHomepage" type="submit" id="choice1" >Choice 1</button><br />
-		                                <button class="choice roundedHomepage" type="submit" id="choice2" >Choice 2</button><br />
-		                                <button class="choice roundedHomepage" type="submit" id="choice3" >Choice 3</button><br />
-		                                <button class="choice roundedHomepage" type="submit" id="choice4" >Choice 4</button><br />
-		                            </div> 
-		                        </div>
-		                        <div class="back"> 
-		                            <p style="padding-top: 10%"><strong>Solution:</strong></p>
-		                            <br />
-		                            <p id="solution"></p>
-		                        </div>
-		                    </div>
-		                </div>
-		  	         </div>
-		  	         <br>
-		            
-                    <button type="button" class="btn btn-default" id="lastButton" onclick="lastCardCreate()">Previous</button>
- 				 	<button type="button" class="btn btn-default" id="nextButton" onclick="nextCardCreate()">Next</button>
-		  			<img src="images/flip.png" style="width:42px;height:42px;border:0" onmouseover ="this.src='images/fliphover.png'" onmouseout ="this.src='images/flip.png'" onclick=flipCard() />
-		             Flip Card
-                    <h5 id="cardStatus">Your current card: </h5>
-
-				</div>
-		</div>
-
-			<div id="newCard"></div>
-				<!-- Creating a Card-->
-				<form name="newCardForm">
-					<div class="cardContainer">
-						<div class="card">
-							<div class="question-area">
-								<h1>Question:</h1>
-								<center>
-								<input type="text" id="question-field" name="question" class="roundedHomepage" placeholder="Type your question here">
-							</center>
-							</div>
-		                    
-		                    <div class="tag-area">
-		                        <h1>Tags (Separate by ',')</h1>
-		                        <center>
-		                        <input type="text" id="tag-field" name="input-tags" class="roundedHomepage" placeholder="Type tags here">
-<!--                        <button id="add-tag">Add tags</button>-->
-								</center>
+    <!-- Header -->
+    <div class="col-md-6">
+        <div id="yourCards"><h1>Card Preview</h1></div>
+        <!-- All Cards -->
+        <div class="allCards">
+            <div class="card">
+                <div class="flashcard">
+                    <div class="flipper">
+                        <div class="front active" display="block">
+                            <br />
+                            <div class ="question" id="question"><b>Question</b></div>
+                            <br />
+                            <div class="answers" id="answers" style="text-align:center;">
+                                <button class="choice roundedHomepage" type="submit" id="choice1" >Choice 1</button><br />
+                                <button class="choice roundedHomepage" type="submit" id="choice2" >Choice 2</button><br />
+                                <button class="choice roundedHomepage" type="submit" id="choice3" >Choice 3</button><br />
+                                <button class="choice roundedHomepage" type="submit" id="choice4" >Choice 4</button><br />
+                            </div> 
+                        </div>
+                        <div class="back"> 
+                            <p style="padding-top: 10%"><strong>Solution:</strong></p>
+                            <br />
+                            <p id="solution"></p>
+                        </div>
                     </div>
+                </div>
+             </div>
+             <br />
+            <button type="button" class="btn btn-default" id="lastButton" onclick="lastCardCreate()">Previous</button>
+            <button type="button" class="btn btn-default" id="nextButton" onclick="nextCardCreate()">Next</button>
+            <img src="images/flip.png" style="width:42px;height:42px;border:0" onmouseover ="this.src='images/fliphover.png'" onmouseout ="this.src='images/flip.png'" onclick=flipCard() />
+             Flip Card
+            <h5 id="cardStatus">Your current card: </h5>
+        </div>
+    </div>
 
-					<div class="answer-area">
-						<h1>Answers (fill in the solution):</h1> 
-						<center>
+    <div id="newCard"></div>
+    <!-- Creating a Card-->
+    <form name="newCardForm">
+        <div class="cardContainer">
+            <div class="card">
+                <div class="question-area">
+                    <h1>Question:</h1>
+                    <center>
+                    <input type="text" id="question-field" name="question" class="roundedHomepage" placeholder="Type your question here">
+                </center>
+                </div>
+                
+                <div class="tag-area">
+                    <h1>Tags (Separate by ',')</h1>
+                    <center>
+                    <input type="text" id="tag-field" name="input-tags" class="roundedHomepage" placeholder="Type tags here">
+                    </center>
+                </div>
+                
+                <div class="answer-area">
+                    <h1>Answers (fill in the solution):</h1> 
+                    <center>
                         <input type="radio" class="correctSolution " name="pickSolution">
-						<input type="text" class="answer-field roundedHomepage" id="answer1" name="answer" 
-						placeholder="Type your first answer">
-						<br />
-                        <input type="radio" class="correctSolution " name="pickSolution">
-						<input type="text" class="answer-field roundedHomepage" id="answer2" name="answer"
-						placeholder="Type your second answer">
-						<br />
-                        <input type="radio" class="correctSolution " name="pickSolution">
-						<input type="text" class="answer-field roundedHomepage" id="answer3" name="answer"
-						placeholder="Type your third answer">
-						<br />
-                        <input type="radio" class="correctSolution " name="pickSolution">
-						<input type="text" class="answer-field roundedHomepage" id="answer4" name="answer"
-						placeholder="Type your fourth answer">
-						<br />
+                        <input type="text" class="answer-field roundedHomepage" id="answer1" name="answer" 
+                        placeholder="Type your first answer">
                         <br />
+                        <input type="radio" class="correctSolution " name="pickSolution">
+                        <input type="text" class="answer-field roundedHomepage" id="answer2" name="answer"
+                        placeholder="Type your second answer">
+                        <br />
+                        <input type="radio" class="correctSolution " name="pickSolution">
+                        <input type="text" class="answer-field roundedHomepage" id="answer3" name="answer"
+                        placeholder="Type your third answer">
+                        <br />
+                        <input type="radio" class="correctSolution " name="pickSolution">
+                        <input type="text" class="answer-field roundedHomepage" id="answer4" name="answer"
+                        placeholder="Type your fourth answer">
+                        <br />
+                        <br />
+                        
                         <div class="addButtons">
                             <button type="button" class="btn btn-primary btn-sm addCard" onclick="addCard()">Add Card</button>
                             <br />
@@ -112,14 +105,11 @@
                             <h4>Do you want to clear fields after making a new card?</h4>
                             <input type="checkbox" id="clearCheckBox">
                         </div>
-                        </center>              
-					</div>
-                    
-				</div>
-			</div>
-		</form>
-
-		</div>
-	</body>
+                    </center>              
+                </div>
+            </div>
+        </div>
+    </form>
+</body>
 </html>
   

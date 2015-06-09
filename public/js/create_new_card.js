@@ -13,8 +13,7 @@ var timeOffset = 1500;
 var indexCreate = 0;
 
 //NOTE TO SELF MAKE SURE THAT THE PATH NAME IS CORRECT FOR THIS
-function addCard()
-{
+function addCard() {
     // getting the answer choices from the user
     var answerFromField = document.getElementsByClassName('answer-field');
     // getting the solution from the user

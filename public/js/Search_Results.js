@@ -1,4 +1,3 @@
-
 var app = angular.module('searchApp', []);
 
 app.controller('SetsController', function($http, $scope) {
@@ -38,3 +37,10 @@ var QueryString = function () {
   }
     return query_string;
 } ();
+
+$(document).ready( function() {
+    var $studyLink = $("#studyBtn").attr("href");
+    var $challengeLink = $("#challengeBtn").attr("href");
+    $("#studyBtn").attr("href", $studyLink + QueryString.tags);
+    $("#challengeBtn").attr("href", $challengeLink + QueryString.tags);
+});
