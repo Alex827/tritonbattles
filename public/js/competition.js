@@ -1,7 +1,3 @@
-// import to get sendScore()
-//$.getScript("../../routes/search.js");
-$.getScript("../../routes/update.js");
-
 // get cards from database
 var cards = getSet();
 // parses the database into JSON
